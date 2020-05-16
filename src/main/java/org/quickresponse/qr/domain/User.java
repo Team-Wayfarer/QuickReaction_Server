@@ -1,4 +1,4 @@
-package org.quickresponse.domain;
+package org.quickresponse.qr.domain;
 
 import com.sun.istack.NotNull;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package org.quickresponse.domain;
+package org.quickresponse.qr.domain;
 
 import lombok.Builder;
 import lombok.Getter;
