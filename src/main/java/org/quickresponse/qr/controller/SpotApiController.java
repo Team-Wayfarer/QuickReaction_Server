@@ -3,7 +3,7 @@ package org.quickresponse.qr.controller;
 import lombok.RequiredArgsConstructor;
 import org.quickresponse.qr.domain.Spot;
 import org.quickresponse.qr.dto.SpotFindAllRequestDto;
-import org.quickresponse.qr.dto.SpotFindOneDetailsRequestDto;
+import org.quickresponse.qr.dto.SpotFindOneRequestDto;
 import org.quickresponse.qr.dto.SpotSaveRequestDto;
 import org.quickresponse.qr.repository.SpotRepository;
 import org.quickresponse.qr.service.SpotService;
@@ -35,13 +35,14 @@ public class SpotApiController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/api/domain/spots/{id}")                                              //id로 spot의 vistinfo 조회
-    public SpotFindOneDetailsRequestDto findOneDetails(@RequestParam(value = "offset", defaultValue = "0") int offset,
-                                                       @RequestParam(value = "limit", defaultValue = "100") int limit,
-                                                        @PathVariable("id") Long id){
+    @GetMapping("/api/domain/spots/{spotId}")                                              //id로 spot의 vistinfo 조회
+    public List<SpotFindOneRequestDto> findOneVisitInfo(@RequestParam(value = "offset", defaultValue = "0") int offset,
+                                                @RequestParam(value = "limit", defaultValue = "100") int limit,
+                                                @PathVariable("spotId") Long id){
         List<Spot> spotDetails = spotRepository.findOneDetails(id, offset, limit);
-
-
+        return spotDetails.stream()
+                .map(m -> new SpotFindOneRequestDto(m))
+                .collect(Collectors.toList());
     }
 
 

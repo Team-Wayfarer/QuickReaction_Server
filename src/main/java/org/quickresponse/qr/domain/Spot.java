@@ -25,20 +25,24 @@ public class Spot {
 
     private String lng;
 
-    @OneToOne
+    @OneToOne(fetch =FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "storeadmin_id")
     private StoreAdmin storeAdmin;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "code_id")
     private Code code;
 
     @OneToMany(mappedBy = "spot")
     private List<VisitInfo> visitInfoList;
 
     @Builder
-    public Spot(String name, String address, String lat, String lng) {
+    public Spot(String name, String address, String lat, String lng, StoreAdmin storeAdmin, Code code) {
         this.name = name;
         this.address = address;
         this.lat = lat;
         this.lng = lng;
+        this.storeAdmin = storeAdmin;
+        this.code = code;
     }
 }

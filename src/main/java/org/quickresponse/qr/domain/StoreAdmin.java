@@ -1,5 +1,6 @@
 package org.quickresponse.qr.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -19,6 +20,13 @@ public class StoreAdmin {
 
     private String businessNumber;
 
-    @OneToOne
+    @OneToOne(mappedBy = "storeAdmin")
     private Spot spot;
+
+    @Builder
+    public StoreAdmin(String name, String businessNumber){
+        this.name=name;
+        this.businessNumber=businessNumber;
+    }
+
 }

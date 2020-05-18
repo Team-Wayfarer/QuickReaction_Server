@@ -26,7 +26,7 @@ public class SpotRepository {
     }
     public List<Spot> findOneDetails(Long id, int offset, int limit){
         return em.createQuery("select s from Spot s"+
-                " join fetch s.visitInfoList" +
+                " join fetch s.visitInfoList v" +
                 " where s.id =: id", Spot.class)
                 .setParameter("id", id)
                 .setFirstResult(offset)

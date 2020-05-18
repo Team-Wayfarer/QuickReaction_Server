@@ -18,7 +18,7 @@ public class Code {
 
     private String url;
 
-    @OneToOne
+    @OneToOne(mappedBy = "code")
     private Spot spot;
 
     @Builder
