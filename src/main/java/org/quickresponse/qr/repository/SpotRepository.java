@@ -24,4 +24,14 @@ public class SpotRepository {
         return em.createQuery("select s from Spot s ",Spot.class)
                 .getResultList();
     }
+    public List<Spot> findOneDetails(Long id, int offset, int limit){
+        return em.createQuery("select s from Spot s"+
+                " join fetch s.visitInfoList" +
+                " where s.id =: id", Spot.class)
+                .setParameter("id", id)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+
+    }
 }

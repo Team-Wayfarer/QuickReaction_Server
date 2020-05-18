@@ -1,15 +1,11 @@
 package org.quickresponse.qr.dto;
-
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.quickresponse.qr.domain.Spot;
-
 import javax.validation.constraints.NotEmpty;
 
 @Getter
 @NoArgsConstructor
-
 public class SpotSaveRequestDto {
     private String name;
     private String address;
@@ -31,6 +27,4 @@ public class SpotSaveRequestDto {
                 .lng(lng)
                 .build();
     }
-
-
 }
