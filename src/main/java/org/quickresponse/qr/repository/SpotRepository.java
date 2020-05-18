@@ -12,8 +12,9 @@ import java.util.List;
 public class SpotRepository {
     private final EntityManager em;
 
-    public void save(Spot spot){
+    public Long join(Spot spot){
         em.persist(spot);
+        return spot.getId();
     }
     public Spot findOne(Long id){
         return em.find(Spot.class, id);
