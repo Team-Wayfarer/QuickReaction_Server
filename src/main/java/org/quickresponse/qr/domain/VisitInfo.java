@@ -28,9 +28,9 @@ public class VisitInfo {
     private LocalDateTime localDateTime;
 
     @Builder
-    public VisitInfo(User user, Spot spot) {
+    public VisitInfo(User user, Spot spot, LocalDateTime localDateTime) {
         this.user = user;
         this.spot = spot;
-        this.localDateTime = LocalDateTime.now();
+        this.localDateTime = localDateTime;
     }
 }
