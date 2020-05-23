@@ -37,7 +37,7 @@ public class UserController {
         return userService.getVisitInfoList(id);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public User getUserInfo(@PathVariable Long id) {
         return userService.getUserInfo(id);
     }
