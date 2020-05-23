@@ -10,12 +10,12 @@ import java.util.stream.Collectors;
 @Getter
 @NoArgsConstructor
 public class SpotFindAllRequestDto {
+
     private Long id;
     private String name;
     private String address;
     private String lat;
     private String lng;
-
 
     public SpotFindAllRequestDto(Spot spot) {
         id = spot.getId();

@@ -21,6 +21,7 @@ import javax.persistence.EntityManager;
 @Component
 @RequiredArgsConstructor
 public class InitDB {
+
     private final InitService initService;
 
     @PostConstruct
@@ -32,9 +33,11 @@ public class InitDB {
     @Transactional
     @RequiredArgsConstructor
     static class InitService{
+
         private final EntityManager em;
 
-        public void dbInit1(){
+        public void dbInit1() {
+
             User user = new User().builder()
                     .name("userA")
                     .contact("000-0000-0000")
@@ -58,6 +61,7 @@ public class InitDB {
                     .build();
             em.persist(code2);
 
+
             StoreAdmin storeAdmin = new StoreAdmin().builder()
                     .name("사업자1")
                     .businessNumber("11111111")
@@ -69,7 +73,6 @@ public class InitDB {
                     .businessNumber("22222222")
                     .build();
             em.persist(storeAdmin2);
-
 
 
             Spot spot = new Spot().builder()
@@ -92,10 +95,11 @@ public class InitDB {
                     .build();
             em.persist(spot2);
 
-           VisitInfo visitInfo = new VisitInfo().builder()
-                   .user(user)
-                   .spot(spot)
-                   .build();
+
+            VisitInfo visitInfo = new VisitInfo().builder()
+                    .user(user)
+                    .spot(spot)
+                    .build();
             em.persist(visitInfo);
 
             VisitInfo visitInfo2 = new VisitInfo().builder()
@@ -109,9 +113,6 @@ public class InitDB {
                     .spot(spot2)
                     .build();
             em.persist(visitInfo3);
-
-
         }
-
     }
 }

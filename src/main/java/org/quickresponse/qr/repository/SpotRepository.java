@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 @RequiredArgsConstructor
 public class SpotRepository {
+
     private final EntityManager em;
 
     public Long join(Spot spot){
@@ -32,6 +33,5 @@ public class SpotRepository {
                 .setFirstResult(offset)
                 .setMaxResults(limit)
                 .getResultList();
-
     }
 }

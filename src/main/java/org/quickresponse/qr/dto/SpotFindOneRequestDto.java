@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 @Getter
 @NoArgsConstructor
 public class SpotFindOneRequestDto {
+
     private Long id;
     private String name;
     private String address;

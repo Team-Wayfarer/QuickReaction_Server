@@ -16,15 +16,16 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 public class SpotApiController {
+
     private final SpotService spotService;
     private final SpotRepository spotRepository;
 
-    @PostMapping("/api/domain/spots")                                       //새로운 spot 생성
+    @PostMapping("/cfcqr/api/spots")                                       //새로운 spot 생성
     public Long save(@RequestBody SpotSaveRequestDto spotSaveRequestDto){
        return spotService.join(spotSaveRequestDto);
     }
 
-    @GetMapping("/api/domain/spots")                                                    //모든 spot 확인
+    @GetMapping("/cfcqr/api/spots")                                                    //모든 spot 확인
     public List<SpotFindAllRequestDto> findAllSpot(){
         List<Spot> spots = spotRepository.findAll();
         if(spots.isEmpty())
@@ -35,7 +36,7 @@ public class SpotApiController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/api/domain/spots/{spotId}")                                              //id로 spot의 vistinfo 조회
+    @GetMapping("/cfcqr/api/spots/{spotId}")                                              //id로 spot의 vistinfo 조회
     public List<SpotFindOneRequestDto> findOneVisitInfo(@RequestParam(value = "offset", defaultValue = "0") int offset,
                                                 @RequestParam(value = "limit", defaultValue = "100") int limit,
                                                 @PathVariable("spotId") Long id){
