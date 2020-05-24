@@ -29,7 +29,7 @@ public class UserService {
         return user;
     }
 
-    public boolean login(UserLoginDto dto) {
+    public long login(UserLoginDto dto) {
         return userRepository.login(dto);
     }
 

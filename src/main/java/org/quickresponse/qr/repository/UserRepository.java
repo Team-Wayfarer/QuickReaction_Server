@@ -6,28 +6,28 @@ import org.quickresponse.qr.dto.UserLoginDto;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import java.util.Optional;
+import javax.persistence.TypedQuery;
 
 @Repository
 @RequiredArgsConstructor
 public class UserRepository {
 
-    private final EntityManager entityManager;
+    private final EntityManager em;
 
     public void save(User user) {
-        entityManager.persist(user);
+        em.persist(user);
     }
 
-    public boolean login(UserLoginDto dto) {
-        Query query = entityManager.createQuery("select count(id) from User where name = ?1 and contact = ?2");
-        query.setParameter(1, dto.getName());
-        query.setParameter(2, dto.getContact());
-        return (int) query.getSingleResult() > 0;
+    public long login(UserLoginDto dto) {
+        String query = "select u from User u where u.name = ?1";
+        TypedQuery<User> jpql = em.createQuery(query, User.class);
+        jpql.setParameter(1, dto.getName());
+        User user = jpql.getSingleResult();
+        return user.getId();
     }
 
     public User findById(Long id) {
-        return entityManager.find(User.class, id);
+        return em.find(User.class, id);
     }
 
     public void updateContact(long id, String contact) {
