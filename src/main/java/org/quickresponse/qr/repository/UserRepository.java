@@ -1,17 +1,36 @@
 package org.quickresponse.qr.repository;
 
+import lombok.RequiredArgsConstructor;
 import org.quickresponse.qr.domain.User;
-import org.quickresponse.qr.dto.UserUpdateRequestDto;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import org.quickresponse.qr.dto.UserLoginDto;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import java.util.Optional;
 
-    public User findByNameAndContact(String name, String contact);
+@Repository
+@RequiredArgsConstructor
+public class UserRepository {
 
-    @Modifying
-    @Query("update User set contact = :con where id = :id")
-    public void updateContact(@Param("id") long id, @Param("con") String contact);
+    private final EntityManager entityManager;
+
+    public void save(User user) {
+        entityManager.persist(user);
+    }
+
+    public boolean login(UserLoginDto dto) {
+        Query query = entityManager.createQuery("select count(id) from User where name = ?1 and contact = ?2");
+        query.setParameter(1, dto.getName());
+        query.setParameter(2, dto.getContact());
+        return (int) query.getSingleResult() > 0;
+    }
+
+    public User findById(Long id) {
+        return entityManager.find(User.class, id);
+    }
+
+    public void updateContact(long id, String contact) {
+
+    }
 }

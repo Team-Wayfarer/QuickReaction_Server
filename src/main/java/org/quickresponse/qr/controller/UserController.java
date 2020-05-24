@@ -27,9 +27,9 @@ public class UserController {
     }
 
     @GetMapping
-    public Long login(@RequestBody UserLoginDto dto) {
-        User user = userService.login(dto);
-        return user.getId();
+    public boolean login(@RequestBody UserLoginDto dto) {
+        boolean ret = userService.login(dto);
+        return ret;
     }
 
     @GetMapping("/{id}/visit")
