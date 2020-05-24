@@ -14,13 +14,6 @@ public class SpotSaveRequestDto {
     private String lat;
     private String lng;
 
-    public SpotSaveRequestDto(String name, Address address, String lat, String lng) {
-        this.name = name;
-        this.address = address;
-        this.lat = lat;
-        this.lng = lng;
-    }
-
     public Spot toEntity(){
         return Spot.builder()
                 .name(name)

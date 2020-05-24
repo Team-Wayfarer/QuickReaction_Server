@@ -75,24 +75,35 @@ public class InitDB {
             em.persist(spotAdmin2);
 
 
-            Address address = new Address("인천시","부평구","재성아파트","102동1705호");
+            Address address = new Address().builder()
+                    .city("인천시")
+                    .gunGu("부평구")
+                    .zipcode("재성아파트")
+                    .deatail("13동 1313호")
+                    .build();
             Spot spot = new Spot().builder()
                     .name("spotA")
                     .address(address)
                     .lat("latA")
                     .lng("lngA")
-                    .storeAdmin(spotAdmin)
+                    .spotAdmin(spotAdmin)
                     .code(code)
                     .build();
             em.persist(spot);
 
-            Address address2 = new Address("인천시","부평구","명직아파트","184동 13호");
+            Address address2 = new Address().builder()
+                    .city("서울시")
+                    .gunGu("강남구 ")
+                    .zipcode("명직아파트")
+                    .deatail("18동 1818호")
+                    .build();
+
             Spot spot2 = new Spot().builder()
                     .name("spotB")
                     .address(address2)
                     .lat("latB")
                     .lng("lngB")
-                    .storeAdmin(spotAdmin2)
+                    .spotAdmin(spotAdmin2)
                     .code(code2)
                     .build();
             em.persist(spot2);

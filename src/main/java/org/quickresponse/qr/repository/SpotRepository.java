@@ -17,6 +17,7 @@ public class SpotRepository {
         em.persist(spot);
         return spot.getId();
     }
+
     public Spot findOne(Long id){
         return em.find(Spot.class, id);
     }
@@ -25,6 +26,7 @@ public class SpotRepository {
         return em.createQuery("select s from Spot s ",Spot.class)
                 .getResultList();
     }
+
     public List<Spot> findOneDetails(Long id, int offset, int limit){
         return em.createQuery("select s from Spot s"+
                 " join fetch s.visitInfoList v" +
