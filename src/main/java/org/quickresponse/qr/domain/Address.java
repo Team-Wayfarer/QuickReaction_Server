@@ -10,6 +10,7 @@ import javax.persistence.Embeddable;
 @Getter
 @NoArgsConstructor
 public class Address {
+
     private String city;
     private String gunGu;
     private String zipcode;

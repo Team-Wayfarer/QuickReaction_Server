@@ -49,11 +49,4 @@ public class SpotController {
                 .map(m -> new SpotFindOneResponseDto(m))
                 .collect(Collectors.toList());
     }
-
-
-
-
-
-
-
 }
