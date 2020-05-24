@@ -2,7 +2,7 @@ package org.quickresponse.qr.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.quickresponse.qr.domain.Spot;
-import org.quickresponse.qr.dto.SpotFindAllReponseDto;
+import org.quickresponse.qr.dto.SpotFindAllResponseDto;
 import org.quickresponse.qr.dto.SpotFindOneResponseDto;
 import org.quickresponse.qr.dto.SpotSaveRequestDto;
 import org.quickresponse.qr.dto.SpotSaveResponseDto;
@@ -29,14 +29,14 @@ public class SpotController {
     }
 
     @GetMapping("/")                                                    //모든 spot 확인
-    public List<SpotFindAllReponseDto> findAllSpot(){
+    public List<SpotFindAllResponseDto> findAllSpot(){
         List<Spot> spots = spotRepository.findAll();
         if(spots.isEmpty()) {
             throw new IllegalStateException("현재 등록된 장소가 없습니다. ");
         }
 
         return spots.stream()
-                .map(s -> new SpotFindAllReponseDto(s))
+                .map(s -> new SpotFindAllResponseDto(s))
                 .collect(Collectors.toList());
     }
 

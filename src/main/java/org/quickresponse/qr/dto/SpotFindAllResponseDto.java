@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Getter
 @NoArgsConstructor
-public class SpotFindAllReponseDto {
+public class SpotFindAllResponseDto {
 
     private Long id;
     private String name;
@@ -19,7 +19,7 @@ public class SpotFindAllReponseDto {
     private String lat;
     private String lng;
 
-    public SpotFindAllReponseDto(Spot spot) {
+    public SpotFindAllResponseDto(Spot spot) {
         id = spot.getId();
         name = spot.getName();
         address = spot.getAddress();

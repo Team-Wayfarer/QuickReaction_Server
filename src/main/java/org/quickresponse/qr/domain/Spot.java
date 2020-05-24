@@ -27,7 +27,7 @@ public class Spot {
     private String lng;
 
     @OneToOne(fetch =FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "storeadmin_id")
+    @JoinColumn(name = "spotadmin_id")
     private SpotAdmin spotAdmin;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

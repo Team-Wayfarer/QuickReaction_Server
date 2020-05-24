@@ -10,14 +10,17 @@ import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 
 
-/**
+/*
+*
  * User
  *- userA, userB
  *
  * Spot
  * spotA, spotB
  *
- */
+*/
+
+
 @Component
 @RequiredArgsConstructor
 public class InitDB {

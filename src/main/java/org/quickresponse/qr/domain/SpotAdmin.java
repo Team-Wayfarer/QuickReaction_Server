@@ -13,14 +13,14 @@ public class SpotAdmin {
 
     @Id
     @GeneratedValue
-    @Column(name = "storeadmin_id")
+    @Column(name = "spotadmin_id")
     private Long id;
 
     private String name;
 
     private String businessNumber;
 
-    @OneToOne(mappedBy = "storeAdmin")
+    @OneToOne(mappedBy = "spotAdmin")
     private Spot spot;
 
     @Builder
