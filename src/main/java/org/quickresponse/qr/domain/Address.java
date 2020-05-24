@@ -8,7 +8,7 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 @Getter
-@NoArgsConstructor
+
 public class Address {
 
     private String city;
@@ -16,6 +16,9 @@ public class Address {
     private String zipcode;
     private String deatail;
 
+    protected Address(){
+
+    }
     @Builder
     public Address(String city, String gunGu, String zipcode, String deatail) {
         this.city = city;

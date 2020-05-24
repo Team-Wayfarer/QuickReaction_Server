@@ -41,50 +41,51 @@ public class InitDB {
 
         public void dbInit1() {
 
-            User user = new User().builder()
+            User user = User.builder()
                     .name("userA")
                     .contact("000-0000-0000")
                     .build();
             em.persist(user);
 
-            User user2 = new User().builder()
+            User user2 =  User.builder()
                     .name("userB")
                     .contact("111-1111-1111")
                     .build();
             em.persist(user2);
 
 
-            Code code = new Code().builder()
+            Code code =  Code.builder()
                     .url("urlA")
                     .build();
             em.persist(code);
 
-            Code code2 = new Code().builder()
+            Code code2 =  Code.builder()
                     .url("urlB")
                     .build();
             em.persist(code2);
 
 
-            SpotAdmin spotAdmin = new SpotAdmin().builder()
+            SpotAdmin spotAdmin =  SpotAdmin.builder()
                     .name("사업자1")
                     .businessNumber("11111111")
                     .build();
             em.persist(spotAdmin);
 
-            SpotAdmin spotAdmin2 = new SpotAdmin().builder()
+            SpotAdmin spotAdmin2 =  SpotAdmin.builder()
                     .name("사업자2")
                     .businessNumber("22222222")
                     .build();
             em.persist(spotAdmin2);
 
 
-            Address address = new Address().builder()
+            Address address =  Address.builder()
                     .city("인천시")
                     .gunGu("부평구")
                     .zipcode("재성아파트")
                     .deatail("13동 1313호")
                     .build();
-            Spot spot = new Spot().builder()
+
+            Spot spot = Spot.builder()
                     .name("spotA")
                     .address(address)
                     .lat("latA")
@@ -94,14 +95,14 @@ public class InitDB {
                     .build();
             em.persist(spot);
 
-            Address address2 = new Address().builder()
+            Address address2 = Address.builder()
                     .city("서울시")
                     .gunGu("강남구 ")
                     .zipcode("명직아파트")
                     .deatail("18동 1818호")
                     .build();
 
-            Spot spot2 = new Spot().builder()
+            Spot spot2 = Spot.builder()
                     .name("spotB")
                     .address(address2)
                     .lat("latB")
@@ -112,19 +113,19 @@ public class InitDB {
             em.persist(spot2);
 
 
-            VisitInfo visitInfo = new VisitInfo().builder()
+            VisitInfo visitInfo =  VisitInfo.builder()
                     .user(user)
                     .spot(spot)
                     .build();
             em.persist(visitInfo);
 
-            VisitInfo visitInfo2 = new VisitInfo().builder()
+            VisitInfo visitInfo2 =  VisitInfo.builder()
                     .user(user)
                     .spot(spot2)
                     .build();
             em.persist(visitInfo2);
 
-            VisitInfo visitInfo3 = new VisitInfo().builder()
+            VisitInfo visitInfo3 = VisitInfo.builder()
                     .user(user2)
                     .spot(spot2)
                     .build();
