@@ -19,7 +19,8 @@ public class Spot {
 
     private String name;
 
-    private String address;
+    @Embedded
+    private Address address;
 
     private String lat;
 
@@ -27,7 +28,7 @@ public class Spot {
 
     @OneToOne(fetch =FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "storeadmin_id")
-    private StoreAdmin storeAdmin;
+    private SpotAdmin spotAdmin;
 
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "code_id")
@@ -37,12 +38,12 @@ public class Spot {
     private List<VisitInfo> visitInfoList;
 
     @Builder
-    public Spot(String name, String address, String lat, String lng, StoreAdmin storeAdmin, Code code) {
+    public Spot(String name, Address address, String lat, String lng, SpotAdmin spotAdmin, Code code) {
         this.name = name;
         this.address = address;
         this.lat = lat;
         this.lng = lng;
-        this.storeAdmin = storeAdmin;
+        this.spotAdmin = spotAdmin;
         this.code = code;
     }
 }

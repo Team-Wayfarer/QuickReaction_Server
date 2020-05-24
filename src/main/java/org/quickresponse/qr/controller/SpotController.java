@@ -5,6 +5,7 @@ import org.quickresponse.qr.domain.Spot;
 import org.quickresponse.qr.dto.SpotFindAllRequestDto;
 import org.quickresponse.qr.dto.SpotFindOneRequestDto;
 import org.quickresponse.qr.dto.SpotSaveRequestDto;
+import org.quickresponse.qr.dto.SpotSaveResponseDto;
 import org.quickresponse.qr.repository.SpotRepository;
 import org.quickresponse.qr.service.SpotService;
 import org.springframework.web.bind.annotation.*;
@@ -15,17 +16,20 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-public class SpotApiController {
+@RequestMapping("/cfcqr/api")
+public class SpotController {
 
     private final SpotService spotService;
     private final SpotRepository spotRepository;
 
-    @PostMapping("/cfcqr/api/spots")                                       //새로운 spot 생성
-    public Long save(@RequestBody SpotSaveRequestDto spotSaveRequestDto){
-       return spotService.join(spotSaveRequestDto);
+    @PostMapping("/spots")                                       //새로운 spot 생성
+    public SpotSaveResponseDto save(@RequestBody SpotSaveRequestDto spotSaveRequestDto){
+        Long joinId = spotService.join(spotSaveRequestDto);
+        return new SpotSaveResponseDto(joinId);
     }
 
-    @GetMapping("/cfcqr/api/spots")                                                    //모든 spot 확인
+
+    @GetMapping("/spots")                                                    //모든 spot 확인
     public List<SpotFindAllRequestDto> findAllSpot(){
         List<Spot> spots = spotRepository.findAll();
         if(spots.isEmpty())
@@ -36,7 +40,7 @@ public class SpotApiController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/cfcqr/api/spots/{spotId}")                                              //id로 spot의 vistinfo 조회
+    @GetMapping("/spots/{spotId}")                                              //id로 spot의 vistinfo 조회
     public List<SpotFindOneRequestDto> findOneVisitInfo(@RequestParam(value = "offset", defaultValue = "0") int offset,
                                                 @RequestParam(value = "limit", defaultValue = "100") int limit,
                                                 @PathVariable("spotId") Long id){

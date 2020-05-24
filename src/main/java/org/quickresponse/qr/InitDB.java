@@ -62,35 +62,37 @@ public class InitDB {
             em.persist(code2);
 
 
-            StoreAdmin storeAdmin = new StoreAdmin().builder()
+            SpotAdmin spotAdmin = new SpotAdmin().builder()
                     .name("사업자1")
                     .businessNumber("11111111")
                     .build();
-            em.persist(storeAdmin);
+            em.persist(spotAdmin);
 
-            StoreAdmin storeAdmin2 = new StoreAdmin().builder()
+            SpotAdmin spotAdmin2 = new SpotAdmin().builder()
                     .name("사업자2")
                     .businessNumber("22222222")
                     .build();
-            em.persist(storeAdmin2);
+            em.persist(spotAdmin2);
 
 
+            Address address = new Address("인천시","부평구","재성아파트","102동1705호");
             Spot spot = new Spot().builder()
                     .name("spotA")
-                    .address("addressA")
+                    .address(address)
                     .lat("latA")
                     .lng("lngA")
-                    .storeAdmin(storeAdmin)
+                    .storeAdmin(spotAdmin)
                     .code(code)
                     .build();
             em.persist(spot);
 
+            Address address2 = new Address("인천시","부평구","명직아파트","184동 13호");
             Spot spot2 = new Spot().builder()
                     .name("spotB")
-                    .address("addressB")
+                    .address(address2)
                     .lat("latB")
                     .lng("lngB")
-                    .storeAdmin(storeAdmin2)
+                    .storeAdmin(spotAdmin2)
                     .code(code2)
                     .build();
             em.persist(spot2);

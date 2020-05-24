@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @Getter
-public class StoreAdmin {
+public class SpotAdmin {
 
     @Id
     @GeneratedValue
@@ -24,7 +24,7 @@ public class StoreAdmin {
     private Spot spot;
 
     @Builder
-    public StoreAdmin(String name, String businessNumber){
+    public SpotAdmin(String name, String businessNumber){
         this.name=name;
         this.businessNumber=businessNumber;
     }

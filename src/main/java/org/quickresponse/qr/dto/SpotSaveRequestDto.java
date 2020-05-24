@@ -1,6 +1,7 @@
 package org.quickresponse.qr.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.quickresponse.qr.domain.Address;
 import org.quickresponse.qr.domain.Spot;
 
 
@@ -9,11 +10,11 @@ import org.quickresponse.qr.domain.Spot;
 public class SpotSaveRequestDto {
 
     private String name;
-    private String address;
+    private Address address;
     private String lat;
     private String lng;
 
-    public SpotSaveRequestDto(String name, String address, String lat, String lng) {
+    public SpotSaveRequestDto(String name, Address address, String lat, String lng) {
         this.name = name;
         this.address = address;
         this.lat = lat;

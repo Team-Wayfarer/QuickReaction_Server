@@ -2,6 +2,7 @@ package org.quickresponse.qr.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.quickresponse.qr.domain.Address;
 import org.quickresponse.qr.domain.Spot;
 
 import java.util.List;
@@ -13,7 +14,7 @@ public class SpotFindAllRequestDto {
 
     private Long id;
     private String name;
-    private String address;
+    private Address address;
     private String lat;
     private String lng;
 
