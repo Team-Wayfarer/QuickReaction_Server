@@ -1,17 +1,36 @@
 package org.quickresponse.qr.repository;
 
+import lombok.RequiredArgsConstructor;
 import org.quickresponse.qr.domain.User;
-import org.quickresponse.qr.dto.UserUpdateRequestDto;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import org.quickresponse.qr.dto.UserLoginDto;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 
-    public User findByNameAndContact(String name, String contact);
+@Repository
+@RequiredArgsConstructor
+public class UserRepository {
 
-    @Modifying
-    @Query("update User set contact = :con where id = :id")
-    public void updateContact(@Param("id") long id, @Param("con") String contact);
+    private final EntityManager em;
+
+    public void save(User user) {
+        em.persist(user);
+    }
+
+    public long login(UserLoginDto dto) {
+        String query = "select u from User u where u.name = ?1";
+        TypedQuery<User> jpql = em.createQuery(query, User.class);
+        jpql.setParameter(1, dto.getName());
+        User user = jpql.getSingleResult();
+        return user.getId();
+    }
+
+    public User findById(Long id) {
+        return em.find(User.class, id);
+    }
+
+    public void updateContact(long id, String contact) {
+
+    }
 }

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -24,21 +25,20 @@ public class UserService {
     @Transactional
     public User join(UserSaveRequestDto dto) {
         User user = dto.toEntity();
-        return userRepository.save(user);
+        userRepository.save(user);
+        return user;
     }
 
-    public User login(UserLoginDto dto) {
-        return userRepository.findByNameAndContact(dto.getName(), dto.getContact());
+    public long login(UserLoginDto dto) {
+        return userRepository.login(dto);
     }
 
     public User getUserInfo(Long id) {
-        return userRepository.findById(id)
-                .orElse(null);
+        return userRepository.findById(id);
     }
 
     public List<VisitInfoDto> getVisitInfoList(Long id) {
-        User user = userRepository.findById(id)
-                .orElse(null);
+        User user = userRepository.findById(id);
         if (user != null) {
             List<VisitInfoDto> res = new ArrayList<>();
             for (VisitInfo visitInfo : user.getVisitInfoList()) {
@@ -48,13 +48,13 @@ public class UserService {
                         .build();
                 res.add(dto);
             }
-            return res;
+            return Collections.unmodifiableList(res);
         }
         return null;
     }
 
     public User updateContact(Long id, UserUpdateRequestDto dto) {
         userRepository.updateContact(id, dto.getContact());
-        return userRepository.getOne(id);
+        return userRepository.findById(id);
     }
 }

@@ -27,9 +27,8 @@ public class UserController {
     }
 
     @GetMapping
-    public Long login(@RequestBody UserLoginDto dto) {
-        User user = userService.login(dto);
-        return user.getId();
+    public long login(@RequestBody UserLoginDto dto) {
+        return userService.login(dto);
     }
 
     @GetMapping("/{id}/visit")
