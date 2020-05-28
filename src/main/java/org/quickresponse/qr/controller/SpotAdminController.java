@@ -1,6 +1,7 @@
 package org.quickresponse.qr.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.quickresponse.qr.dto.SpotAdminDetailResponseDto;
 import org.quickresponse.qr.dto.SpotAdminSaveRequestDto;
 import org.quickresponse.qr.dto.SpotAdminSaveResponseDto;
 import org.quickresponse.qr.service.SpotAdminService;
@@ -17,6 +18,13 @@ public class SpotAdminController {
     public SpotAdminSaveResponseDto join(@RequestBody SpotAdminSaveRequestDto spotAdminSaveRequestDto){
         Long id = spotAdminService.join(spotAdminSaveRequestDto);
         return new SpotAdminSaveResponseDto(id);
-
     }
+
+    @GetMapping("/{spotAdminId}")
+    public SpotAdminDetailResponseDto findOneDetail(@PathVariable("spotAdminId") Long id){
+        return new SpotAdminDetailResponseDto(spotAdminService.findOneDetail(id));
+    }
+
+
+
 }

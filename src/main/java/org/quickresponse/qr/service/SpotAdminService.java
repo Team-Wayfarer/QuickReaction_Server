@@ -1,6 +1,7 @@
 package org.quickresponse.qr.service;
 
 import lombok.RequiredArgsConstructor;
+import org.quickresponse.qr.domain.SpotAdmin;
 import org.quickresponse.qr.dto.SpotAdminSaveRequestDto;
 import org.quickresponse.qr.repository.SpotAdminRepository;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,10 @@ public class SpotAdminService {
 
     @Transactional
     public Long join(SpotAdminSaveRequestDto spotAdminSaveRequestDto) {
-
         return spotAdminRepository.join(spotAdminSaveRequestDto.toEntity());
+    }
+
+    public SpotAdmin findOneDetail(Long id) {
+        return spotAdminRepository.findOneDetail(id);
     }
 }
