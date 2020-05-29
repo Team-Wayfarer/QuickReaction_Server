@@ -7,6 +7,8 @@ import org.quickresponse.qr.repository.SpotAdminRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -21,5 +23,9 @@ public class SpotAdminService {
 
     public SpotAdmin findOneDetail(Long id) {
         return spotAdminRepository.findOneDetail(id);
+    }
+
+    public List<SpotAdmin> findAll(int offset, int limit) {
+        return spotAdminRepository.findAll(offset, limit);
     }
 }

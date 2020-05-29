@@ -49,4 +49,13 @@ public class SpotAdminRepository {
             throw new NoResultException("등록된 spot이 없습니다.");
         }
     }
+
+    public List<SpotAdmin> findAll(int offset, int limit) {
+        return em.createQuery("select sa from SpotAdmin sa" +
+                " join fetch sa.spot s",
+                SpotAdmin.class)
+                .setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+    }
 }
