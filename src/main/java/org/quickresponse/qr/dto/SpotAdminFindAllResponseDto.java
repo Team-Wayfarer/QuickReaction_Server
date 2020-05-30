@@ -8,14 +8,16 @@ import org.quickresponse.qr.domain.SpotAdmin;
 @Getter
 @NoArgsConstructor
 public class SpotAdminFindAllResponseDto {
-    private String SpotAdminname;
+    private String SpotAdminName;
     private String businessNumber;
+    private String contact;
     private String SpotName;
 
     @Builder
     public SpotAdminFindAllResponseDto(SpotAdmin spotAdmin) {
-        SpotAdminname = spotAdmin.getName() ;
+        SpotAdminName = spotAdmin.getName();
         businessNumber = spotAdmin.getBusinessNumber();
+        contact=spotAdmin.getContact();
         SpotName = spotAdmin.getSpot().getName();
     }
 }

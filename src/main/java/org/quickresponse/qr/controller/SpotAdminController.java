@@ -39,9 +39,4 @@ public class SpotAdminController {
     public SpotAdminDetailResponseDto findOneDetail(@PathVariable("spotAdminId") Long id){
         return new SpotAdminDetailResponseDto(spotAdminService.findOneDetail(id));
     }
-
-
-
-
-
 }

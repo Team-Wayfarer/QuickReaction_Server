@@ -7,13 +7,15 @@ import org.quickresponse.qr.domain.SpotAdmin;
 @Getter
 @NoArgsConstructor
 public class SpotAdminDetailResponseDto {
-    private String SpotAdminname;
+    private String SpotAdminName;
     private String businessNumber;
+    private String contact;
     private String SpotName;
 
     public SpotAdminDetailResponseDto(SpotAdmin spotAdmin) {
-        SpotAdminname = spotAdmin.getName() ;
+        SpotAdminName = spotAdmin.getName() ;
         businessNumber = spotAdmin.getBusinessNumber();
         SpotName = spotAdmin.getSpot().getName();
+        contact = spotAdmin.getContact();
     }
 }
