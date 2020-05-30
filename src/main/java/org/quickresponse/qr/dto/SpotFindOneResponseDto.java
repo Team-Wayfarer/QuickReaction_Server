@@ -18,6 +18,7 @@ public class SpotFindOneResponseDto {
     private Address address;
     private String lat;
     private String lng;
+    private String spotAdminContact;
     private List<SpotVisitInfoDetailsDto> spotVisitInfoDetailsDto;
 
     public SpotFindOneResponseDto(Spot spot) {
@@ -26,6 +27,7 @@ public class SpotFindOneResponseDto {
         address = spot.getAddress();
         lat = spot.getLat();
         lng = spot.getLng();
+        spotAdminContact=spot.getSpotAdmin().getContact();
         spotVisitInfoDetailsDto= spot.getVisitInfoList().stream()
                 .map(v -> new SpotVisitInfoDetailsDto(v))
                 .collect(Collectors.toList());
