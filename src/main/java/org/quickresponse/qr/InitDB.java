@@ -68,12 +68,14 @@ public class InitDB {
             SpotAdmin spotAdmin =  SpotAdmin.builder()
                     .name("사업자1")
                     .businessNumber("11111111")
+                    .contact("010-0000-0000")
                     .build();
             em.persist(spotAdmin);
 
             SpotAdmin spotAdmin2 =  SpotAdmin.builder()
                     .name("사업자2")
                     .businessNumber("22222222")
+                    .contact("010-1111-1111")
                     .build();
             em.persist(spotAdmin2);
 
