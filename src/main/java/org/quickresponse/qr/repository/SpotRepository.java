@@ -29,6 +29,9 @@ public class SpotRepository {
     }
 
     public List<Spot> findOneDetails(Long id, int offset, int limit){
+        if(findOne(id)==null)
+            throw new NullPointerException("등록된 spot이 아닙니다.");
+
         return em.createQuery("select s from Spot s"+
                 " join fetch s.visitInfoList v" +
                 " where s.id =: id  order by v.id desc", Spot.class)
