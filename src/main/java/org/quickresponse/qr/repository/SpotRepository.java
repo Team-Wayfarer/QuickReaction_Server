@@ -5,6 +5,7 @@ import org.quickresponse.qr.domain.Spot;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import java.util.List;
 
 @Repository
@@ -35,5 +36,18 @@ public class SpotRepository {
                 .setFirstResult(offset)
                 .setMaxResults(limit)
                 .getResultList();
+    }
+
+    public Spot findSpotBySpotAdminId( Long id ){
+        try {
+            return em.createQuery("select s from Spot s " +
+                    " join s.spotAdmin sa" +
+                    " where sa.id =: id", Spot.class)
+                    .setParameter("id", id)
+                    .getSingleResult();
+        } catch (NoResultException e){
+            return null;
+        }
+
     }
 }
