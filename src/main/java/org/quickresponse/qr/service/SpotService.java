@@ -22,12 +22,14 @@ public class SpotService {
     @Transactional
     public Long join(SpotSaveRequestDto spotSaveRequestDto, Long spotAdminId) {
         SpotAdmin findedSpotAdmin = spotAdminRepository.find(spotAdminId);
-        if(findedSpotAdmin==null)
+        if(findedSpotAdmin==null) {
             throw new NullPointerException("등록된 사업자가 아닙니다.");
+        }
 
         Spot spotBySpotAdminId = spotRepository.findSpotBySpotAdminId(spotAdminId);
-        if(spotBySpotAdminId!=null)
+        if(spotBySpotAdminId!=null) {
             throw new IllegalStateException("이미 spot이 등록되어있는 사업자 입니다.");
+        }
 
         Spot spot = spotSaveRequestDto.toEntity();
         spot.setSpotAdmin(findedSpotAdmin);

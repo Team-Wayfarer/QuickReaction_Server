@@ -47,8 +47,9 @@ public class SpotController {
                                                          @PathVariable("spotId") Long id){
         List<Spot> spotDetails = spotRepository.findOneDetails(id, offset, limit);
 
-        if(spotDetails.isEmpty())
+        if(spotDetails.isEmpty()) {
             throw new NullPointerException("현재 visitInfo가 없습니다. ");
+        }
 
         return spotDetails.stream()
                 .map(m -> new SpotFindOneResponseDto(m))
