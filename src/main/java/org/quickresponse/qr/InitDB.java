@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
+import java.time.LocalDateTime;
 
 
 /*
@@ -118,12 +119,14 @@ public class InitDB {
             VisitInfo visitInfo =  VisitInfo.builder()
                     .user(user)
                     .spot(spot)
+                    .localDateTime(LocalDateTime.now())
                     .build();
             em.persist(visitInfo);
 
             VisitInfo visitInfo2 =  VisitInfo.builder()
                     .user(user)
                     .spot(spot2)
+                    .localDateTime(LocalDateTime.now())
                     .build();
             em.persist(visitInfo2);
 
