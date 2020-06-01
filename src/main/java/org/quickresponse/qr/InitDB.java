@@ -133,6 +133,7 @@ public class InitDB {
             VisitInfo visitInfo3 = VisitInfo.builder()
                     .user(user2)
                     .spot(spot2)
+                    .localDateTime(LocalDateTime.now())
                     .build();
             em.persist(visitInfo3);
         }
