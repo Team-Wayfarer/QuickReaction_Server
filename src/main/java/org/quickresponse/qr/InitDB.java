@@ -84,7 +84,7 @@ public class InitDB {
                     .city("인천시")
                     .gunGu("부평구")
                     .zipcode("재성아파트")
-                    .deatail("13동 1313호")
+                    .detail("13동 1313호")
                     .build();
 
             Spot spot = Spot.builder()
@@ -101,7 +101,7 @@ public class InitDB {
                     .city("서울시")
                     .gunGu("강남구 ")
                     .zipcode("명직아파트")
-                    .deatail("18동 1818호")
+                    .detail("18동 1818호")
                     .build();
 
             Spot spot2 = Spot.builder()
