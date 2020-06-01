@@ -25,12 +25,14 @@ public class VisitInfoService {
     @Transactional
     public Long save(Long userId, Long spotId) {
         User user = userRepository.findById(userId);
-        if(user==null)
+        if(user==null) {
             throw new NoResultException("입력한 userId가 존재하지 않습니다. ");
+        }
 
         Spot spot = spotRepository.findOne(spotId);
-        if(spot==null)
+        if(spot==null) {
             throw new NoResultException("입력한 spotId가 존재하지 않습니다. ");
+        }
 
         VisitInfo visitInfo =  VisitInfo.builder()
                                 .user(user)
