@@ -1,17 +1,13 @@
 package org.quickresponse.qr.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@Setter
 public class Spot {
 
     @Id
@@ -50,7 +46,7 @@ public class Spot {
     }
 
     //연관관계 메서드
-    public void  setSpotAdmin(SpotAdmin spotAdmin){
+    public void setSpotAdmin(SpotAdmin spotAdmin){
         this.spotAdmin = spotAdmin;
         spotAdmin.setSpot(this);
     }

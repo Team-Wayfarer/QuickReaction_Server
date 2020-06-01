@@ -1,5 +1,6 @@
 package org.quickresponse.qr.dto;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.quickresponse.qr.domain.Address;
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SpotFindOneResponseDto {
 
     private Long id;

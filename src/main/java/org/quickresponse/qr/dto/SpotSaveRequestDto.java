@@ -1,4 +1,6 @@
 package org.quickresponse.qr.dto;
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.quickresponse.qr.domain.Address;
@@ -6,7 +8,7 @@ import org.quickresponse.qr.domain.Spot;
 
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SpotSaveRequestDto {
 
     private String name;
@@ -14,6 +16,7 @@ public class SpotSaveRequestDto {
     private String lat;
     private String lng;
 
+    @Builder
     public SpotSaveRequestDto(String name, Address address, String lat, String lng) {
         this.name = name;
         this.address = address;

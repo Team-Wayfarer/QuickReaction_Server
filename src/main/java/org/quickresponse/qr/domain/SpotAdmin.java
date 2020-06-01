@@ -10,7 +10,6 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @Getter
-@Setter
 public class SpotAdmin {
 
     @Id
@@ -26,6 +25,10 @@ public class SpotAdmin {
 
     @OneToOne(mappedBy = "spotAdmin")
     private Spot spot;
+
+    public void setSpot(Spot spot){
+        this.spot = spot;
+    }
 
     @Builder
     public SpotAdmin(String name, String businessNumber, String contact){
