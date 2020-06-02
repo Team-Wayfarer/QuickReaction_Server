@@ -1,5 +1,6 @@
 package org.quickresponse.qr.domain;
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class VisitInfo {
 
@@ -29,8 +30,20 @@ public class VisitInfo {
 
     @Builder
     public VisitInfo(User user, Spot spot, LocalDateTime localDateTime) {
-        this.user = user;
-        this.spot = spot;
+        setUser(user);
+        setSpot(spot);
         this.localDateTime = localDateTime;
+    }
+
+    //연관관계 메서드
+
+    private void setUser(User user){
+        this.user=user;
+        user.getVisitInfoList().add(this);
+    }
+
+    private void setSpot(Spot spot){
+        this.spot=spot;
+        spot.getVisitInfoList().add(this);
     }
 }
