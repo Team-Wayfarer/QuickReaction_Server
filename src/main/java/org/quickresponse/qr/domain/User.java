@@ -1,22 +1,21 @@
 package org.quickresponse.qr.domain;
 
 import com.sun.istack.NotNull;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
 @Getter
-@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Long id;
 
@@ -26,16 +25,18 @@ public class User {
     @NotNull
     private String contact;
 
-    @OneToMany(mappedBy = "user")
-    private List<VisitInfo> visitInfoList;
+    private String email;
 
-    @Builder
-    public User(String name, String contact) {
-        this.name = name;
-        this.contact = contact;
-    }
+    private String password;
+
+    @OneToMany(mappedBy = "user")
+    private List<VisitInfo> visitInfoList = new ArrayList<>();
 
     public List<VisitInfo> getVisitInfoList() {
         return visitInfoList;
+    }
+
+    public boolean checkPassword(String password) {
+        return this.password.equals(password);
     }
 }

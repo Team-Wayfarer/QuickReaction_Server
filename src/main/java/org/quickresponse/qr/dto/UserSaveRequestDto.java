@@ -1,5 +1,6 @@
 package org.quickresponse.qr.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +9,9 @@ import org.quickresponse.qr.domain.User;
 import javax.validation.constraints.NotEmpty;
 
 @Getter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class UserSaveRequestDto {
 
     @NotEmpty
@@ -17,16 +20,18 @@ public class UserSaveRequestDto {
     @NotEmpty
     private String contact;
 
-    @Builder
-    public UserSaveRequestDto(String name, String contact) {
-        this.name = name;
-        this.contact = contact;
-    }
+    @NotEmpty
+    private String email;
+
+    @NotEmpty
+    private String password;
 
     public User toEntity() {
         return User.builder()
-                .name(this.name)
-                .contact(this.contact)
+                .name(name)
+                .contact(contact)
+                .email(email)
+                .password(password)
                 .build();
     }
 }
