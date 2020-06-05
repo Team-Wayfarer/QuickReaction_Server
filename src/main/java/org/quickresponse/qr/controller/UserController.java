@@ -29,11 +29,6 @@ public class UserController {
         return userService.join(dto);
     }
 
-//    @GetMapping("/{id}/visit")
-//    public List<VisitInfoDto> getVisitInfoList(@PathVariable Long id) {
-//        return userService.getVisitInfoList(id);
-//    }
-
     @ApiOperation(value = "유저 상세 정보 조회", notes = "" +
             "Long id; 유저 고유번호\n" +
             "String name; 유저 이름 \n" +
