@@ -1,11 +1,12 @@
 package org.quickresponse.qr.service.spotAdmin.dto;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.quickresponse.qr.domain.spotAdmin.SpotAdmin;
 
 @Getter
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SpotAdminDetailResponseDto {
 
     private String SpotAdminName;
