@@ -63,7 +63,6 @@ public class InitDB {
                     .build();
             em.persist(user2);
 
-
             Code code =  Code.builder()
                     .url("urlA")
                     .build();

@@ -49,7 +49,7 @@ public class UserService {
         String email = dto.getEmail();
         User user = getUser(email);
         if( !user.checkPassword(dto.getPassword())) {
-            throw new UserException("", ErrorCode.WRONG_PASSWORD);
+            throw new UserException("틀린 암호입니다", ErrorCode.WRONG_PASSWORD);
         }
         return jwtTokenProvider.createToken(dto.getEmail());
 
