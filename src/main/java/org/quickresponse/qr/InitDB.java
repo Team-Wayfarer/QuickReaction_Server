@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
+import java.time.LocalDateTime;
 
 
 /*
@@ -68,12 +69,14 @@ public class InitDB {
             SpotAdmin spotAdmin =  SpotAdmin.builder()
                     .name("사업자1")
                     .businessNumber("11111111")
+                    .contact("010-0000-0000")
                     .build();
             em.persist(spotAdmin);
 
             SpotAdmin spotAdmin2 =  SpotAdmin.builder()
                     .name("사업자2")
                     .businessNumber("22222222")
+                    .contact("010-1111-1111")
                     .build();
             em.persist(spotAdmin2);
 
@@ -82,7 +85,7 @@ public class InitDB {
                     .city("인천시")
                     .gunGu("부평구")
                     .zipcode("재성아파트")
-                    .deatail("13동 1313호")
+                    .detail("13동 1313호")
                     .build();
 
             Spot spot = Spot.builder()
@@ -99,7 +102,7 @@ public class InitDB {
                     .city("서울시")
                     .gunGu("강남구 ")
                     .zipcode("명직아파트")
-                    .deatail("18동 1818호")
+                    .detail("18동 1818호")
                     .build();
 
             Spot spot2 = Spot.builder()
@@ -116,18 +119,21 @@ public class InitDB {
             VisitInfo visitInfo =  VisitInfo.builder()
                     .user(user)
                     .spot(spot)
+                    .localDateTime(LocalDateTime.now())
                     .build();
             em.persist(visitInfo);
 
             VisitInfo visitInfo2 =  VisitInfo.builder()
                     .user(user)
                     .spot(spot2)
+                    .localDateTime(LocalDateTime.now())
                     .build();
             em.persist(visitInfo2);
 
             VisitInfo visitInfo3 = VisitInfo.builder()
                     .user(user2)
                     .spot(spot2)
+                    .localDateTime(LocalDateTime.now())
                     .build();
             em.persist(visitInfo3);
         }

@@ -3,6 +3,7 @@ package org.quickresponse.qr.domain;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -20,13 +21,19 @@ public class SpotAdmin {
 
     private String businessNumber;
 
+    private String contact;
+
     @OneToOne(mappedBy = "spotAdmin")
     private Spot spot;
 
-    @Builder
-    public SpotAdmin(String name, String businessNumber){
-        this.name=name;
-        this.businessNumber=businessNumber;
+    public void setSpot(Spot spot){
+        this.spot = spot;
     }
 
+    @Builder
+    public SpotAdmin(String name, String businessNumber, String contact){
+        this.name=name;
+        this.businessNumber=businessNumber;
+        this.contact = contact;
+    }
 }

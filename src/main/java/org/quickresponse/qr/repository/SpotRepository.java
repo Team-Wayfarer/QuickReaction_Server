@@ -5,6 +5,7 @@ import org.quickresponse.qr.domain.Spot;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import java.util.List;
 
 @Repository
@@ -28,6 +29,10 @@ public class SpotRepository {
     }
 
     public List<Spot> findOneDetails(Long id, int offset, int limit){
+        if(findOne(id)==null) {
+            throw new NullPointerException("등록된 spot이 아닙니다.");
+        }
+
         return em.createQuery("select s from Spot s"+
                 " join fetch s.visitInfoList v" +
                 " where s.id =: id  order by v.id desc", Spot.class)
@@ -35,5 +40,18 @@ public class SpotRepository {
                 .setFirstResult(offset)
                 .setMaxResults(limit)
                 .getResultList();
+    }
+
+    public Spot findSpotBySpotAdminId( Long id ){
+        try {
+            return em.createQuery("select s from Spot s " +
+                    " join s.spotAdmin sa" +
+                    " where sa.id =: id", Spot.class)
+                    .setParameter("id", id)
+                    .getSingleResult();
+        } catch (NoResultException e){
+            return null;
+        }
+
     }
 }

@@ -24,7 +24,7 @@ public class User {
 
     @NotNull
     private String contact;
-
+  
     private String email;
 
     private String password;

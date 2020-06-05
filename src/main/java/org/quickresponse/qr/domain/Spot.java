@@ -1,14 +1,13 @@
 package org.quickresponse.qr.domain;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class Spot {
 
@@ -35,7 +34,7 @@ public class Spot {
     private Code code;
 
     @OneToMany(mappedBy = "spot")
-    private List<VisitInfo> visitInfoList;
+    private List<VisitInfo> visitInfoList = new ArrayList<>();
 
     @Builder
     public Spot(String name, Address address, String lat, String lng, SpotAdmin spotAdmin, Code code) {
@@ -45,5 +44,11 @@ public class Spot {
         this.lng = lng;
         this.spotAdmin = spotAdmin;
         this.code = code;
+    }
+
+    //연관관계 메서드
+    public void setSpotAdmin(SpotAdmin spotAdmin){
+        this.spotAdmin = spotAdmin;
+        spotAdmin.setSpot(this);
     }
 }
