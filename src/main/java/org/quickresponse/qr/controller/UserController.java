@@ -9,10 +9,7 @@ import org.quickresponse.qr.service.user.dto.UserDetailResponseDto;
 import org.quickresponse.qr.service.user.dto.UserSaveRequestDto;
 import org.quickresponse.qr.service.user.dto.UserUpdateRequestDto;
 import org.quickresponse.qr.service.user.UserService;
-import org.quickresponse.qr.service.visitInfo.dto.VisitInfoDto;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Api(tags = { "2. User" })
 @Slf4j
