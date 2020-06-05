@@ -19,7 +19,8 @@ public class SpotAdminService {
 
     @Transactional
     public Long join(SpotAdminSaveRequestDto spotAdminSaveRequestDto) {
-        return spotAdminRepository.join(spotAdminSaveRequestDto.toEntity());
+        SpotAdmin spotAdmin = spotAdminRepository.join(spotAdminSaveRequestDto.toEntity());
+        return spotAdmin.getId();
     }
 
     public SpotAdmin findOneDetail(Long id) {

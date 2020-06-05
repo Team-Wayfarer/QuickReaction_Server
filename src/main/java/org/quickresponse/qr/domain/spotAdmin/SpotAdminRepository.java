@@ -15,12 +15,12 @@ public class SpotAdminRepository {
 
     private final EntityManager em;
 
-    public Long join(SpotAdmin spotAdmin) {
+    public SpotAdmin join(SpotAdmin spotAdmin) {
         if (!findByBusinessName(spotAdmin.getBusinessNumber()).isEmpty()) {
             throw new InvalidDataAccessApiUsageException("이미 등록된 사업자 번호와 동일합니다.");
         }
         em.persist(spotAdmin);
-        return spotAdmin.getId();
+        return spotAdmin;
     }
 
     public SpotAdmin find(Long id) {
