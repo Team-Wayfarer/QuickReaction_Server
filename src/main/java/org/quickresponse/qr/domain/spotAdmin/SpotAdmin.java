@@ -1,5 +1,6 @@
 package org.quickresponse.qr.domain.spotAdmin;
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +9,7 @@ import org.quickresponse.qr.domain.spot.Spot;
 import javax.persistence.*;
 
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class SpotAdmin {
 
