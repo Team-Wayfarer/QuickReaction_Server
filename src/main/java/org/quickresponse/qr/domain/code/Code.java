@@ -26,4 +26,8 @@ public class Code {
     public Code(String url) {
         this.url = url;
     }
+
+    public void setSpot(Spot spot){
+        this.spot = spot;
+    }
 }

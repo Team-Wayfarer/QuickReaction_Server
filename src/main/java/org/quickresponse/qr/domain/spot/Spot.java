@@ -55,4 +55,9 @@ public class Spot {
         this.spotAdmin = spotAdmin;
         spotAdmin.setSpot(this);
     }
+
+    public void setCode(Code code){
+        this.code = code;
+        code.setSpot(this);
+    }
 }
