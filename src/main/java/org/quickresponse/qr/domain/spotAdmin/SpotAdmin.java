@@ -31,6 +31,10 @@ public class SpotAdmin {
         this.spot = spot;
     }
 
+    public boolean checkPassword(String password) {
+        return this.password.equals(password);
+    }
+
     @Builder
     public SpotAdmin(String name, String businessNumber, String contact, String password, String email ){
         this.name=name;
