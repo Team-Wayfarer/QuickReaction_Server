@@ -50,12 +50,16 @@ public class InitDB {
             User user = User.builder()
                     .name("userA")
                     .contact("000-0000-0000")
+                    .email("aaa@aaa.com")
+                    .password("abcd")
                     .build();
             em.persist(user);
 
             User user2 =  User.builder()
                     .name("userB")
                     .contact("111-1111-1111")
+                    .email("bbb@aaa.com")
+                    .password("abcd")
                     .build();
             em.persist(user2);
 

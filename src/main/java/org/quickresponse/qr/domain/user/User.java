@@ -40,4 +40,12 @@ public class User {
     public boolean checkPassword(String password) {
         return this.password.equals(password);
     }
+
+    @Builder
+    public User(String name, String contact, String email, String password) {
+        this.name = name;
+        this.contact = contact;
+        this.email = email;
+        this.password = password;
+    }
 }
