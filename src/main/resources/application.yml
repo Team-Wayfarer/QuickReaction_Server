@@ -17,3 +17,9 @@ spring:
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
+
+security:
+  jwt:
+    token:
+      secret-key: ibmcallforcode2020inkoreahackathon
+      expire-length: 3600000
