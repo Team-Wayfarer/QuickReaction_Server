@@ -77,6 +77,8 @@ public class InitDB {
 
             SpotAdmin spotAdmin =  SpotAdmin.builder()
                     .name("사업자1")
+                    .password("1212")
+                    .email("xxx@naver.com")
                     .businessNumber("11111111")
                     .contact("010-0000-0000")
                     .build();
@@ -84,6 +86,8 @@ public class InitDB {
 
             SpotAdmin spotAdmin2 =  SpotAdmin.builder()
                     .name("사업자2")
+                    .password("3434")
+                    .email("aaa@gmail.com")
                     .businessNumber("22222222")
                     .contact("010-1111-1111")
                     .build();

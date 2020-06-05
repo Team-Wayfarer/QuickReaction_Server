@@ -7,11 +7,14 @@ import org.quickresponse.qr.domain.visitInfo.VisitInfo;
 import org.quickresponse.qr.domain.spot.SpotRepository;
 import org.quickresponse.qr.domain.user.UserRepository;
 import org.quickresponse.qr.domain.visitInfo.VisitInfoRepository;
+import org.quickresponse.qr.service.visitInfo.dto.VisitInfoListByUserIdDto;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.NoResultException;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -41,5 +44,19 @@ public class VisitInfoService {
                                 .build();
         VisitInfo saved = visitInfoRepository.save(visitInfo);
         return saved.getId();
+    }
+
+    public List<VisitInfoListByUserIdDto> findVisitInfoListByUserId(Long id, int offset, int limit) {
+        User user = userRepository.findById(id);
+        if(user==null)
+            throw new IllegalStateException("들록된 회원이 없습니다.");
+
+        List<VisitInfo> visitInfos = visitInfoRepository.findVisitInfoListByUserId(id, offset, limit);
+
+        List<VisitInfoListByUserIdDto> collect = visitInfos.stream()
+                .map(v -> new VisitInfoListByUserIdDto(v))
+                .collect(Collectors.toList());
+
+        return collect;
     }
 }
