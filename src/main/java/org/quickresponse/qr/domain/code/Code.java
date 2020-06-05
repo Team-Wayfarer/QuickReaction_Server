@@ -20,15 +20,18 @@ public class Code {
 
     private String url;
 
-    @OneToOne(mappedBy = "code")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "spot_id")
     private Spot spot;
 
     @Builder
-    public Code(String url) {
+    public Code(Spot spot, String url) {
+        setSpot(spot);
         this.url = url;
     }
 
-    public void setSpot(Spot spot){
+    private void setSpot(Spot spot) {
         this.spot = spot;
+        spot.setCode(this);
     }
 }

@@ -63,17 +63,6 @@ public class InitDB {
                     .build();
             em.persist(user2);
 
-            Code code =  Code.builder()
-                    .url("urlA")
-                    .build();
-            em.persist(code);
-
-            Code code2 =  Code.builder()
-                    .url("urlB")
-                    .build();
-            em.persist(code2);
-
-
             SpotAdmin spotAdmin =  SpotAdmin.builder()
                     .name("사업자1")
                     .businessNumber("11111111")
@@ -91,38 +80,47 @@ public class InitDB {
 
             Address address =  Address.builder()
                     .city("인천시")
-                    .gunGu("부평구")
-                    .zipcode("재성아파트")
-                    .detail("13동 1313호")
+                    .gunGu("남동구")
+                    .zipcode("이노프라자")
+                    .detail("7층")
                     .build();
 
             Spot spot = Spot.builder()
-                    .name("spotA")
+                    .name("코다차야")
                     .address(address)
-                    .lat("latA")
-                    .lng("lngA")
+                    .lat("37.4457671")
+                    .lng("126.699528")
                     .spotAdmin(spotAdmin)
-                    .code(code)
                     .build();
             em.persist(spot);
 
             Address address2 = Address.builder()
-                    .city("서울시")
-                    .gunGu("강남구 ")
-                    .zipcode("명직아파트")
-                    .detail("18동 1818호")
+                    .city("인천시")
+                    .gunGu("남동구")
+                    .zipcode("롯데백화점")
+                    .detail("지하1")
                     .build();
 
             Spot spot2 = Spot.builder()
-                    .name("spotB")
+                    .name("프리스비")
                     .address(address2)
-                    .lat("latB")
-                    .lng("lngB")
+                    .lat("37.4424881")
+                    .lng("126.7001883")
                     .spotAdmin(spotAdmin2)
-                    .code(code2)
                     .build();
             em.persist(spot2);
 
+            Code code =  Code.builder()
+                    .spot(spot)
+                    .url("urlA")
+                    .build();
+            em.persist(code);
+
+            Code code2 =  Code.builder()
+                    .spot(spot2)
+                    .url("urlB")
+                    .build();
+            em.persist(code2);
 
             VisitInfo visitInfo =  VisitInfo.builder()
                     .user(user)

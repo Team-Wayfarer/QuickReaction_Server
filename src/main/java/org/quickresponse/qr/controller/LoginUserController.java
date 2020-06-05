@@ -3,7 +3,7 @@ package org.quickresponse.qr.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.quickresponse.qr.service.common.dto.TokenResponse;
-import org.quickresponse.qr.service.user.user.UserLoginDto;
+import org.quickresponse.qr.service.user.dto.UserLoginDto;
 import org.quickresponse.qr.service.user.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

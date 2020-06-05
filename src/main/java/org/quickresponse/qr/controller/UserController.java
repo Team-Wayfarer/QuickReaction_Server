@@ -3,10 +3,11 @@ package org.quickresponse.qr.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.quickresponse.qr.domain.user.User;
-import org.quickresponse.qr.service.user.user.UserSaveRequestDto;
-import org.quickresponse.qr.service.user.user.UserUpdateRequestDto;
-import org.quickresponse.qr.service.visitInfo.dto.VisitInfoDto;
+import org.quickresponse.qr.service.user.dto.UserDetailResponseDto;
+import org.quickresponse.qr.service.user.dto.UserSaveRequestDto;
+import org.quickresponse.qr.service.user.dto.UserUpdateRequestDto;
 import org.quickresponse.qr.service.user.UserService;
+import org.quickresponse.qr.service.visitInfo.dto.VisitInfoDto;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,13 +25,13 @@ public class UserController {
         return userService.join(dto);
     }
 
-    @GetMapping("/{id}/visit")
-    public List<VisitInfoDto> getVisitInfoList(@PathVariable Long id) {
-        return userService.getVisitInfoList(id);
-    }
+//    @GetMapping("/{id}/visit")
+//    public List<VisitInfoDto> getVisitInfoList(@PathVariable Long id) {
+//        return userService.getVisitInfoList(id);
+//    }
 
     @GetMapping("/{id}")
-    public User getUserInfo(@PathVariable Long id) {
+    public UserDetailResponseDto getUserInfo(@PathVariable Long id) {
         return userService.getUserInfo(id);
     }
 
