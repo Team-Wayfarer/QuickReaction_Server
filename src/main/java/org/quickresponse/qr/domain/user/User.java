@@ -10,9 +10,7 @@ import java.util.List;
 
 @Entity
 @Getter
-@Builder
 @NoArgsConstructor
-@AllArgsConstructor
 public class User {
 
     @Id
@@ -32,10 +30,6 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<VisitInfo> visitInfoList = new ArrayList<>();
-
-    public List<VisitInfo> getVisitInfoList() {
-        return visitInfoList;
-    }
 
     public boolean checkPassword(String password) {
         return this.password.equals(password);
