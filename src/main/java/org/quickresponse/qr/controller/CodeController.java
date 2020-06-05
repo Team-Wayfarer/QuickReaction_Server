@@ -1,5 +1,6 @@
 package org.quickresponse.qr.controller;
 
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.quickresponse.qr.service.code.CodeService;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
+@Api(tags = { "5. Code" })
 @Slf4j
 @RestController
 @RequestMapping("/cfcqr/api/codes")
