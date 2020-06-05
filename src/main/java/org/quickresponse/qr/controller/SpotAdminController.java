@@ -2,7 +2,6 @@ package org.quickresponse.qr.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.quickresponse.qr.domain.spotAdmin.SpotAdmin;
-import org.quickresponse.qr.service.spot.SpotService;
 import org.quickresponse.qr.service.spotAdmin.SpotAdminService;
 import org.quickresponse.qr.service.spotAdmin.dto.SpotAdminDetailResponseDto;
 import org.quickresponse.qr.service.spotAdmin.dto.SpotAdminFindAllResponseDto;

@@ -6,10 +6,6 @@ import org.quickresponse.qr.service.code.CodeService;
 import org.quickresponse.qr.service.code.dto.SpotResponseDtoByCode;
 import org.springframework.web.bind.annotation.*;
 
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 
 @Slf4j

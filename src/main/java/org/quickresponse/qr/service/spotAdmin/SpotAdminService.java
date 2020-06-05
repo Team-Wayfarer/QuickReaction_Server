@@ -46,4 +46,8 @@ public class SpotAdminService {
         }
         return jwtTokenProvider.createToken(spotAdminLoginDto.getEmail());
     }
+
+    public Long getSpotAdminId(String email) {
+        return spotAdminRepository.findSpotAdminByEmail(email).get().getId();
+    }
 }

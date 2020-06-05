@@ -24,12 +24,14 @@ public class LoginController {
     @PostMapping("/user")
     public TokenResponse login(@RequestBody UserLoginDto dto) {
         String token = userService.createToken(dto);
-        return new TokenResponse(token, "bearer");
+        Long userId = userService.getUserId(dto.getEmail());
+        return new TokenResponse(token, "bearer", userId);
     }
 
     @PostMapping("/spotAdmin")
     public TokenResponse loginSpotAdmin(@RequestBody SpotAdminLoginDto spotAdminLoginDto){
         String token = spotAdminService.createToken(spotAdminLoginDto);
-        return new TokenResponse(token, "bearer");
+        Long spotAdminId = spotAdminService.getSpotAdminId(spotAdminLoginDto.getEmail());
+        return new TokenResponse(token, "bearer", spotAdminId);
     }
 }

@@ -67,4 +67,8 @@ public class UserService {
         userRepository.updateContact(id, dto.getContact());
         return userRepository.findById(id);
     }
+
+    public Long getUserId(String email) {
+        return this.getUser(email).getId();
+    }
 }
