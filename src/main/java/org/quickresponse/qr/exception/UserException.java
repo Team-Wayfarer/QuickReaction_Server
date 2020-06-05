@@ -1,6 +1,6 @@
 package org.quickresponse.qr.exception;
 
-import org.quickresponse.qr.dto.ErrorCode;
+import org.quickresponse.qr.service.common.dto.ErrorCode;
 
 public class UserException extends RuntimeException {
 

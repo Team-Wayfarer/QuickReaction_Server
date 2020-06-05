@@ -1,13 +1,13 @@
 package org.quickresponse.qr.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.quickresponse.qr.domain.Spot;
-import org.quickresponse.qr.dto.SpotFindAllResponseDto;
-import org.quickresponse.qr.dto.SpotFindOneResponseDto;
-import org.quickresponse.qr.dto.SpotSaveRequestDto;
-import org.quickresponse.qr.dto.SpotSaveResponseDto;
-import org.quickresponse.qr.repository.SpotRepository;
-import org.quickresponse.qr.service.SpotService;
+import org.quickresponse.qr.domain.spot.Spot;
+import org.quickresponse.qr.service.spot.dto.SpotFindAllResponseDto;
+import org.quickresponse.qr.service.spot.dto.SpotFindOneResponseDto;
+import org.quickresponse.qr.service.spot.dto.SpotSaveRequestDto;
+import org.quickresponse.qr.service.spot.dto.SpotSaveResponseDto;
+import org.quickresponse.qr.domain.spot.SpotRepository;
+import org.quickresponse.qr.service.spot.SpotService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

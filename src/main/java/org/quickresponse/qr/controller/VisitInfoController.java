@@ -1,8 +1,8 @@
 package org.quickresponse.qr.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.quickresponse.qr.dto.VisitInfoSaveResponseDto;
-import org.quickresponse.qr.service.VisitInfoService;
+import org.quickresponse.qr.service.visitInfo.dto.VisitInfoSaveResponseDto;
+import org.quickresponse.qr.service.visitInfo.VisitInfoService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

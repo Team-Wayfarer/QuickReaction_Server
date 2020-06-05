@@ -2,11 +2,11 @@ package org.quickresponse.qr.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.quickresponse.qr.domain.User;
-import org.quickresponse.qr.dto.UserSaveRequestDto;
-import org.quickresponse.qr.dto.UserUpdateRequestDto;
-import org.quickresponse.qr.dto.VisitInfoDto;
-import org.quickresponse.qr.service.UserService;
+import org.quickresponse.qr.domain.user.User;
+import org.quickresponse.qr.service.user.user.UserSaveRequestDto;
+import org.quickresponse.qr.service.user.user.UserUpdateRequestDto;
+import org.quickresponse.qr.service.visitInfo.dto.VisitInfoDto;
+import org.quickresponse.qr.service.user.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

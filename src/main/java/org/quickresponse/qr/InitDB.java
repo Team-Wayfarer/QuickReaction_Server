@@ -3,6 +3,11 @@ package org.quickresponse.qr;
 
 import lombok.RequiredArgsConstructor;
 import org.quickresponse.qr.domain.*;
+import org.quickresponse.qr.domain.code.Code;
+import org.quickresponse.qr.domain.spot.Spot;
+import org.quickresponse.qr.domain.spotAdmin.SpotAdmin;
+import org.quickresponse.qr.domain.user.User;
+import org.quickresponse.qr.domain.visitInfo.VisitInfo;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
