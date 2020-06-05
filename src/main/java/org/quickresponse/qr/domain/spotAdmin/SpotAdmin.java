@@ -19,9 +19,9 @@ public class SpotAdmin {
     private Long id;
 
     private String name;
-
+    private String password;
+    private String email;
     private String businessNumber;
-
     private String contact;
 
     @OneToOne(mappedBy = "spotAdmin")
@@ -32,8 +32,10 @@ public class SpotAdmin {
     }
 
     @Builder
-    public SpotAdmin(String name, String businessNumber, String contact){
+    public SpotAdmin(String name, String businessNumber, String contact, String password, String email ){
         this.name=name;
+        this.password = password;
+        this.email = email;
         this.businessNumber=businessNumber;
         this.contact = contact;
     }

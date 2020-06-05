@@ -10,12 +10,14 @@ import org.quickresponse.qr.domain.spotAdmin.SpotAdmin;
 public class SpotAdminDetailResponseDto {
 
     private String SpotAdminName;
+    private String email;
     private String businessNumber;
     private String contact;
     private String SpotName;
 
     public SpotAdminDetailResponseDto(SpotAdmin spotAdmin) {
         SpotAdminName = spotAdmin.getName() ;
+        email = spotAdmin.getEmail();
         businessNumber = spotAdmin.getBusinessNumber();
         SpotName = spotAdmin.getSpot().getName();
         contact = spotAdmin.getContact();

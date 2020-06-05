@@ -10,6 +10,7 @@ import org.quickresponse.qr.domain.spotAdmin.SpotAdmin;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SpotAdminFindAllResponseDto {
     private String SpotAdminName;
+    private String email;
     private String businessNumber;
     private String contact;
     private String SpotName;
@@ -17,6 +18,7 @@ public class SpotAdminFindAllResponseDto {
     @Builder
     public SpotAdminFindAllResponseDto(SpotAdmin spotAdmin) {
         SpotAdminName = spotAdmin.getName();
+        email = spotAdmin.getEmail();
         businessNumber = spotAdmin.getBusinessNumber();
         contact=spotAdmin.getContact();
         SpotName = spotAdmin.getSpot().getName();
