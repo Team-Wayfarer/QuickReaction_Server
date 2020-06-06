@@ -5,11 +5,16 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.quickresponse.qr.domain.user.User;
+import org.quickresponse.qr.domain.user.UserStatus;
+import org.quickresponse.qr.exception.UserException;
+import org.quickresponse.qr.service.common.dto.ErrorCode;
+import org.quickresponse.qr.service.user.dto.StatusChangeResponseDto;
 import org.quickresponse.qr.service.user.dto.UserDetailResponseDto;
 import org.quickresponse.qr.service.user.dto.UserSaveRequestDto;
 import org.quickresponse.qr.service.user.dto.UserUpdateRequestDto;
 import org.quickresponse.qr.service.user.UserService;
 import org.quickresponse.qr.service.visitInfo.dto.VisitInfoDto;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,5 +49,14 @@ public class UserController {
     public Long updateContact(@PathVariable Long id, @RequestBody UserUpdateRequestDto dto) {
         User user = userService.updateContact(id, dto);
         return user.getId();
+    }
+
+    @PostMapping("/{userId}/change/{status}/")
+    public StatusChangeResponseDto changeUserStatus(@PathVariable("userId") Long userId, @RequestParam("status") UserStatus userStatus){
+        if(userStatus!=UserStatus.INFECT)
+            throw new UserException("확진자 등록만 가능합니다.", ErrorCode.FAVORITE_DUPLICATED.INVALID_AUTHENTICATION);
+
+        User user = userService.changeUserStatus(userId, userStatus);
+        return new StatusChangeResponseDto(user);
     }
 }
