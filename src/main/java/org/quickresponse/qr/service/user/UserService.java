@@ -71,4 +71,12 @@ public class UserService {
     public Long getUserId(String email) {
         return this.getUser(email).getId();
     }
+
+    public boolean validatesEmail(String email) {
+        User user = userRepository.findByEmail(email).orElse(null);
+        if(user != null) {
+            return true;
+        }
+        return false;
+    }
 }
