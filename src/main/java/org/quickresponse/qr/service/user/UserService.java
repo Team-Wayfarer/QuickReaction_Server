@@ -100,14 +100,12 @@ public class UserService {
                 if (!isBefore(VisitInfoByUser.getLocalDateTime(), VisitInfoBySpot.getLocalDateTime())) {
                     continue;
                 }
-
                 if (isOnThreeHours(VisitInfoByUser.getLocalDateTime(), VisitInfoBySpot.getLocalDateTime()) && isSameDay(VisitInfoByUser.getLocalDateTime(), VisitInfoBySpot.getLocalDateTime())) {
                     User doubtUser = userRepository.findById(VisitInfoBySpot.getUser().getId());
                     if (isInfection(doubtUser.getUserStatus())) {
                         continue;
                     }
                     doubtUser.setUserStatus(UserStatus.DOUBT);
-
                 }
             }
         }

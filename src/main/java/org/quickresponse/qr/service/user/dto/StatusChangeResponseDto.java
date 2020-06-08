@@ -9,6 +9,7 @@ import org.quickresponse.qr.domain.user.UserStatus;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class StatusChangeResponseDto {
+
     private Long id;
     private UserStatus userStatus;
 
