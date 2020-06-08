@@ -9,6 +9,7 @@ import org.quickresponse.qr.service.spotAdmin.dto.SpotAdminDetailResponseDto;
 import org.quickresponse.qr.service.spotAdmin.dto.SpotAdminFindAllResponseDto;
 import org.quickresponse.qr.service.spotAdmin.dto.SpotAdminSaveRequestDto;
 import org.quickresponse.qr.service.spotAdmin.dto.SpotAdminSaveResponseDto;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -54,5 +55,16 @@ public class SpotAdminController {
     @GetMapping("/{spotAdminId}")
     public SpotAdminDetailResponseDto findOneDetail(@PathVariable("spotAdminId") Long id){
         return new SpotAdminDetailResponseDto(spotAdminService.findOneDetail(id));
+    }
+
+    @ApiOperation(value = "관리자 이메일 중복 확인", notes = "RequestBody로 이메일 전달" )
+    @PostMapping("/checkmail")
+    public ResponseEntity<Boolean> checkEmail(@RequestBody String email) {
+        return ResponseEntity.ok(spotAdminService.validatesEmail(email));
+    }
+    @ApiOperation(value = "사업자번호 중복 확인", notes = "RequestBody로 번호 전달" )
+    @PostMapping("/checknumber")
+    public ResponseEntity<Boolean> checkBusinessNumber(@RequestBody String businessNumber) {
+        return ResponseEntity.ok(spotAdminService.validatesBusinessNumber(businessNumber));
     }
 }

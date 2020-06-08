@@ -45,6 +45,7 @@ public class UserController {
         return user.getId();
     }
 
+    @ApiOperation(value = "유저 이메일 중복 확인", notes = "RequestBody로 이메일 전달" )
     @PostMapping("/check")
     public ResponseEntity<Boolean> checkEmail(@RequestBody String email) {
         return ResponseEntity.ok(userService.validatesEmail(email));
