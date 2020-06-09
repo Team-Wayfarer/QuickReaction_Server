@@ -62,6 +62,7 @@ public class SpotAdminController {
     public ResponseEntity<Boolean> checkEmail(@RequestBody String email) {
         return ResponseEntity.ok(spotAdminService.validatesEmail(email));
     }
+    
     @ApiOperation(value = "사업자번호 중복 확인", notes = "RequestBody로 번호 전달" )
     @PostMapping("/checknumber")
     public ResponseEntity<Boolean> checkBusinessNumber(@RequestBody String businessNumber) {
