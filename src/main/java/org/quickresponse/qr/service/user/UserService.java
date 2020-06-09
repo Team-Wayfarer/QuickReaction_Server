@@ -121,32 +121,34 @@ public class UserService {
 
 
     private boolean isOnAWeek(LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        if (ChronoUnit.DAYS.between(startDateTime, endDateTime) > 7)
+        if (ChronoUnit.DAYS.between(startDateTime, endDateTime) > 7) {
             return false;
+        }
 
         return true;
     }
 
     private boolean isBefore(LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        if (!startDateTime.isBefore(endDateTime))
+        if (!startDateTime.isBefore(endDateTime)) {
             return false;
+        }
 
         return true;
     }
 
     private boolean isOnThreeHours(LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        if (ChronoUnit.HOURS.between(startDateTime, endDateTime) > 3)
+        if (ChronoUnit.HOURS.between(startDateTime, endDateTime) > 3) {
             return false;
+        }
 
         return true;
     }
 
     private boolean isSameDay(LocalDateTime startDateTime, LocalDateTime endDateTime) {
-        if (ChronoUnit.DAYS.between(startDateTime, endDateTime) != 0)
+        if (ChronoUnit.DAYS.between(startDateTime, endDateTime) != 0) {
             return false;
+        }
 
         return true;
     }
-
-
 }
