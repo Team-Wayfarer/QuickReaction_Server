@@ -14,7 +14,7 @@ public class AndroidPushPeriodicNotifications {
     public static String PeriodicNotificationJson() throws JSONException {
         LocalDate localDate = LocalDate.now();
 
-        String sampleData[] = {"fQaoZe1aoPg:APA91bGRPk2-OYKmRSRNa7ubhxjuAUUaElOoR9mUIVmX4X3DMcua8T94lLBMOQTnPlbzX7gcqIabwamRxzlEil9rkM-5LdFay1zGGi1VM0vIofDzm8EHtC-ClZ8cKE_2TPtaQnx-eAQj"};
+        String sampleData[] = {"device_token"};
 
         JSONObject body = new JSONObject();
 
