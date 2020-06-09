@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.UnsupportedEncodingException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -26,7 +27,7 @@ public class NotificationController {
 
     @GetMapping(value = "/send")
     public @ResponseBody
-    ResponseEntity<String> send() throws JSONException, InterruptedException  {
+    ResponseEntity<String> send() throws JSONException, InterruptedException, UnsupportedEncodingException {
         String notifications = AndroidPushPeriodicNotifications.PeriodicNotificationJson();
 
         HttpEntity<String> request = new HttpEntity<>(notifications);

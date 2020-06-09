@@ -4,8 +4,8 @@ package org.quickresponse.qr.service.fcm;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.io.UnsupportedEncodingException;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,11 +17,11 @@ public class AndroidPushPeriodicNotifications {
 
         LocalDate localDate = LocalDate.now();
 
-        String sampleData[] = {"device_token"};
+        String sampleData[] = {"device token"};
 
         JSONObject body = new JSONObject();
 
-        List<String> tokenlist = new ArrayList<String>();
+        List<String> tokenlist = new ArrayList<>();
 
         for(int i=0; i<sampleData.length; i++){
             tokenlist.add(sampleData[i]);
@@ -37,8 +37,8 @@ public class AndroidPushPeriodicNotifications {
 
         JSONObject notification = new JSONObject();
 
-        notification.put("title", URLEncoder.encode("제성","UTF-8"));
-        notification.put("body", URLEncoder.encode("진짜 안녕! ","UTF-8"));
+        notification.put("title",URLEncoder.encode("ㅎㅇ","UTF-8"));
+        notification.put("body",URLEncoder.encode("진짜 안녕!","UTF-8"));
 
         body.put("notification", notification);
 
