@@ -33,26 +33,28 @@ public class Spot {
     @JoinColumn(name = "spotadmin_id")
     private SpotAdmin spotAdmin;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "code_id")
+    @OneToOne(mappedBy = "spot")
     private Code code;
 
     @OneToMany(mappedBy = "spot")
     private List<VisitInfo> visitInfoList = new ArrayList<>();
 
     @Builder
-    public Spot(String name, Address address, String lat, String lng, SpotAdmin spotAdmin, Code code) {
+    public Spot(String name, Address address, String lat, String lng, SpotAdmin spotAdmin) {
         this.name = name;
         this.address = address;
         this.lat = lat;
         this.lng = lng;
         this.spotAdmin = spotAdmin;
-        this.code = code;
     }
 
     //연관관계 메서드
     public void setSpotAdmin(SpotAdmin spotAdmin){
         this.spotAdmin = spotAdmin;
         spotAdmin.setSpot(this);
+    }
+
+    public void setCode(Code code) {
+        this.code = code;
     }
 }

@@ -1,10 +1,11 @@
-package org.quickresponse.qr.service.user.user;
+package org.quickresponse.qr.service.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.quickresponse.qr.domain.user.User;
+import org.quickresponse.qr.domain.user.UserStatus;
 
 import javax.validation.constraints.NotEmpty;
 

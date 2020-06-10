@@ -1,13 +1,14 @@
 package org.quickresponse.qr.domain.spotAdmin;
 
 import lombok.RequiredArgsConstructor;
-import org.quickresponse.qr.domain.spotAdmin.SpotAdmin;
+import org.quickresponse.qr.domain.spot.Spot;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -15,12 +16,12 @@ public class SpotAdminRepository {
 
     private final EntityManager em;
 
-    public Long join(SpotAdmin spotAdmin) {
+    public SpotAdmin join(SpotAdmin spotAdmin) {
         if (!findByBusinessName(spotAdmin.getBusinessNumber()).isEmpty()) {
             throw new InvalidDataAccessApiUsageException("이미 등록된 사업자 번호와 동일합니다.");
         }
         em.persist(spotAdmin);
-        return spotAdmin.getId();
+        return spotAdmin;
     }
 
     public SpotAdmin find(Long id) {
@@ -56,5 +57,21 @@ public class SpotAdminRepository {
                 .setFirstResult(offset)
                 .setMaxResults(limit)
                 .getResultList();
+    }
+
+    public Optional<SpotAdmin> findSpotAdminByEmail(String email) {
+        return em.createQuery("select sa from SpotAdmin sa" +
+                                " where sa.email =: email", SpotAdmin.class )
+                .setParameter("email", email)
+                .getResultStream()
+                .findFirst();
+    }
+
+    public Optional<SpotAdmin> findByBusinessNumber(String businessNumber) {
+        return em.createQuery("select sa from SpotAdmin sa" +
+                " where sa.businessNumber =: businessNumber", SpotAdmin.class )
+                .setParameter("businessNumber", businessNumber)
+                .getResultStream()
+                .findFirst();
     }
 }

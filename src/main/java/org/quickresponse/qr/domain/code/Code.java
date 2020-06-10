@@ -1,5 +1,6 @@
 package org.quickresponse.qr.domain.code;
 
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,7 +9,7 @@ import org.quickresponse.qr.domain.spot.Spot;
 import javax.persistence.*;
 
 @Entity
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 public class Code {
 
@@ -19,11 +20,18 @@ public class Code {
 
     private String url;
 
-    @OneToOne(mappedBy = "code")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "spot_id")
     private Spot spot;
 
     @Builder
-    public Code(String url) {
+    public Code(Spot spot, String url) {
+        setSpot(spot);
         this.url = url;
+    }
+
+    private void setSpot(Spot spot) {
+        this.spot = spot;
+        spot.setCode(this);
     }
 }

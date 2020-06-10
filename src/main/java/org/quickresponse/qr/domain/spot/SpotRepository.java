@@ -14,9 +14,9 @@ public class SpotRepository {
 
     private final EntityManager em;
 
-    public Long join(Spot spot){
+    public Spot join(Spot spot){
         em.persist(spot);
-        return spot.getId();
+        return spot;
     }
 
     public Spot findOne(Long id){

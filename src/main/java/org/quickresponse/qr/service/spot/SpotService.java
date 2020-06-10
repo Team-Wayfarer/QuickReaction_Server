@@ -35,7 +35,8 @@ public class SpotService {
         Spot spot = spotSaveRequestDto.toEntity();
         spot.setSpotAdmin(findedSpotAdmin);
 
-        return spotRepository.join(spot);
+        Spot joinedSpot = spotRepository.join(spot);
+        return joinedSpot.getId();
     }
 
 }

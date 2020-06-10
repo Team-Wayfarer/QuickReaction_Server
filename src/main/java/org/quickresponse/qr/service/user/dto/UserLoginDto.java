@@ -1,4 +1,4 @@
-package org.quickresponse.qr.service.user.user;
+package org.quickresponse.qr.service.user.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

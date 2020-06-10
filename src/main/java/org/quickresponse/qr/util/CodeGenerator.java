@@ -17,15 +17,16 @@ import java.util.Hashtable;
 public class CodeGenerator {
 
     static final String preUrl = "";
-    static final String preFilePath = "";
+    static final String preFilePath = "/Users/pandahun/out/";
 
-    static void create(Long spotId) throws IOException, WriterException {
-        String qrCodeText = preUrl + "/" + spotId;
-        String filePath = preFilePath + "/" + spotId + ".png";
+    public static String create(Long spotId) throws IOException, WriterException {
+        String qrCodeText = spotId +"";
+        String filePath = preFilePath + spotId + ".png";
         int size = 300;
         String fileType = "png";
         File qrFile = new File(filePath);
         createQRImage(qrFile, qrCodeText, size, fileType);
+        return filePath;
     }
 
 
