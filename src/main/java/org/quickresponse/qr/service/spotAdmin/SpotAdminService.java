@@ -50,4 +50,22 @@ public class SpotAdminService {
     public Long getSpotAdminId(String email) {
         return spotAdminRepository.findSpotAdminByEmail(email).get().getId();
     }
+
+    public boolean validatesEmail(String email) {
+        SpotAdmin spotAdmin = spotAdminRepository.findSpotAdminByEmail(email)
+                .orElse(null);
+        if(spotAdmin != null) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean validatesBusinessNumber(String businessNumber) {
+        SpotAdmin spotAdmin = spotAdminRepository.findByBusinessNumber(businessNumber)
+                .orElse(null);
+        if(spotAdmin != null) {
+            return true;
+        }
+        return false;
+    }
 }

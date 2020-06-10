@@ -1,6 +1,7 @@
 package org.quickresponse.qr.domain.spotAdmin;
 
 import lombok.RequiredArgsConstructor;
+import org.quickresponse.qr.domain.spot.Spot;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.stereotype.Repository;
 
@@ -62,6 +63,14 @@ public class SpotAdminRepository {
         return em.createQuery("select sa from SpotAdmin sa" +
                                 " where sa.email =: email", SpotAdmin.class )
                 .setParameter("email", email)
+                .getResultStream()
+                .findFirst();
+    }
+
+    public Optional<SpotAdmin> findByBusinessNumber(String businessNumber) {
+        return em.createQuery("select sa from SpotAdmin sa" +
+                " where sa.businessNumber =: businessNumber", SpotAdmin.class )
+                .setParameter("businessNumber", businessNumber)
                 .getResultStream()
                 .findFirst();
     }

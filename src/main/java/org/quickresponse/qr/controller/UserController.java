@@ -14,12 +14,11 @@ import org.quickresponse.qr.service.user.dto.UserSaveRequestDto;
 import org.quickresponse.qr.service.user.dto.UserUpdateRequestDto;
 import org.quickresponse.qr.service.user.UserService;
 import org.quickresponse.qr.service.visitInfo.dto.VisitInfoDto;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-@Api(tags = { "2. User" })
+@Api(tags = {"2. User"})
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -38,7 +37,7 @@ public class UserController {
             "Long id; 유저 고유번호\n" +
             "String name; 유저 이름 \n" +
             "String contact; 유저 전화번호\n" +
-            "String email; 유저 이메일" )
+            "String email; 유저 이메일")
     @GetMapping("/{id}")
     public UserDetailResponseDto getUserInfo(@PathVariable Long id) {
         return userService.getUserInfo(id);
@@ -58,5 +57,10 @@ public class UserController {
 
         User user = userService.changeUserStatus(userId, userStatus);
         return new StatusChangeResponseDto(user);
+
+    @ApiOperation(value = "유저 이메일 중복 확인", notes = "RequestBody로 이메일 전달" )
+    @PostMapping("/check")
+    public ResponseEntity<Boolean> checkEmail(@RequestBody String email) {
+        return ResponseEntity.ok(userService.validatesEmail(email));
     }
 }
