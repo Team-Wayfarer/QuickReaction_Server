@@ -126,6 +126,9 @@ public class UserService {
                     LocalDateTime userVisitTime = userVisitInfoBySpot.getLocalDateTime();
                     Spot userVisitedSpot = userVisitInfoBySpot.getSpot();
                     String duid = doubtUser.getDuid();
+                    if(duid.isEmpty()){
+                        continue;
+                    }
 
                     String notifications = AndroidPushPeriodicNotifications.DoubtUserNotification(duid,userVisitedSpot, infectionVisitTime,userVisitTime );
                     HttpEntity<String> request = new HttpEntity<>(notifications);

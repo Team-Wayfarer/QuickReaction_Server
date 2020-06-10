@@ -27,7 +27,7 @@ public class AndroidPushPeriodicNotifications {
 
         data.put("title",URLEncoder.encode("확진자와 접촉하였습니다.","UTF-8"));
         data.put("body1",URLEncoder.encode("방문한 장소 이름: "+ userVisitedSpot.getName(),"UTF-8"));
-        data.put("body2",URLEncoder.encode("방문한 장소 주소 "+ userVisitedSpot.getAddress(),"UTF-8"));
+        data.put("body2",URLEncoder.encode("방문한 장소 주소 "+ userVisitedSpot.getAddress().toString(),"UTF-8"));
         data.put("body3",URLEncoder.encode("확진자 방문시간 "+ infectionVisitTime.toString(),"UTF-8"));
         data.put("body4",URLEncoder.encode("본인 방문시간 "+ userVisitTime.toString(),"UTF-8"));
 

@@ -54,6 +54,7 @@ public class InitDB {
                     .contact("000-0000-0000")
                     .email("aaa@aaa.com")
                     .password("abcd")
+                    .duid("a")
                     .build();
             em.persist(user);
 
@@ -62,6 +63,7 @@ public class InitDB {
                     .contact("111-1111-1111")
                     .email("bbb@aaa.com")
                     .password("abcd")
+                    .duid("b")
                     .build();
             em.persist(user2);
 
@@ -70,6 +72,7 @@ public class InitDB {
                     .contact("22-2222-2222")
                     .email("123123@aaa.com")
                     .password("cccc")
+                    .duid("c")
                     .build();
             em.persist(user3);
 
@@ -172,6 +175,7 @@ public class InitDB {
                     .contact("444-4444-4444")
                     .email("zzzz@zzzz.com")
                     .password("abcd")
+                    .duid("d")
                     .build();
             em.persist(user);
 
@@ -180,6 +184,7 @@ public class InitDB {
                     .contact("5555-5555-5555")
                     .email("xxx@xxxx.com")
                     .password("abcd")
+                    .duid("e")
                     .build();
             em.persist(user2);
 
@@ -188,6 +193,7 @@ public class InitDB {
                     .contact("777-7777-7777")
                     .email("ccc@ccc.com")
                     .password("cccc")
+                    .duid("f")
                     .build();
             em.persist(user3);
 
