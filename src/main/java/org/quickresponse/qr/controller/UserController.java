@@ -18,6 +18,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
+
 @Api(tags = {"2. User"})
 @Slf4j
 @RestController
@@ -50,15 +52,14 @@ public class UserController {
         return user.getId();
     }
 
-    @ApiOperation(value = "유저 확진자 등록", notes = "유저를 확진자로 등록합니다")
+    @ApiOperation(value = "유저 확진자 등록", notes = "선택한 유저를 확진자로 등록합니다")
     @PostMapping("/{userId}/change/{status}/infect")
-    public StatusChangeResponseDto changeUserStatus(@PathVariable("userId") Long userId, @RequestParam("status") UserStatus userStatus) {
+    public StatusChangeResponseDto changeUserStatus(@PathVariable("userId") Long userId, @RequestParam("status") UserStatus userStatus) throws UnsupportedEncodingException {
         if (userStatus != UserStatus.INFECT)
             throw new UserException("확진자 등록만 가능합니다.", ErrorCode.FAVORITE_DUPLICATED.INVALID_AUTHENTICATION);
 
         User user = userService.changeUserStatus(userId, userStatus);
         return new StatusChangeResponseDto(user);
-
     }
 
     @ApiOperation(value = "유저 이메일 중복 확인", notes = "RequestBody로 이메일 전달" )

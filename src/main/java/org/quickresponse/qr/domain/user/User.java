@@ -44,6 +44,10 @@ public class User {
         this.userStatus = userStatus;
     }
 
+    public void setDuid(String duid){
+        this.duid= duid;
+    }
+
     @Builder
     public User(String name, String contact, String email, String password) {
         this.name = name;
