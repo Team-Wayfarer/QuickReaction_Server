@@ -50,13 +50,16 @@ public class UserController {
         return user.getId();
     }
 
-    @PostMapping("/{userId}/change/{status}/")
-    public StatusChangeResponseDto changeUserStatus(@PathVariable("userId") Long userId, @RequestParam("status") UserStatus userStatus){
-        if(userStatus!=UserStatus.INFECT)
+    @ApiOperation(value = "유저 확진자 등록", notes = "유저를 확진자로 등록합니다")
+    @PostMapping("/{userId}/change/{status}/infect")
+    public StatusChangeResponseDto changeUserStatus(@PathVariable("userId") Long userId, @RequestParam("status") UserStatus userStatus) {
+        if (userStatus != UserStatus.INFECT)
             throw new UserException("확진자 등록만 가능합니다.", ErrorCode.FAVORITE_DUPLICATED.INVALID_AUTHENTICATION);
 
         User user = userService.changeUserStatus(userId, userStatus);
         return new StatusChangeResponseDto(user);
+
+    }
 
     @ApiOperation(value = "유저 이메일 중복 확인", notes = "RequestBody로 이메일 전달" )
     @PostMapping("/check")

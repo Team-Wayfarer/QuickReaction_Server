@@ -150,6 +150,7 @@ public class UserService {
         }
 
         return true;
+    }
 
     public boolean validatesEmail(String email) {
         User user = userRepository.findByEmail(email).orElse(null);

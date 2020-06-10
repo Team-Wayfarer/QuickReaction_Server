@@ -31,6 +31,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserStatus userStatus;
 
+    private String duid;
+
     @OneToMany(mappedBy = "user")
     private List<VisitInfo> visitInfoList = new ArrayList<>();
 
