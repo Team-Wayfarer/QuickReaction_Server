@@ -126,7 +126,7 @@ public class UserService {
                     LocalDateTime userVisitTime = userVisitInfoBySpot.getLocalDateTime();
                     Spot userVisitedSpot = userVisitInfoBySpot.getSpot();
                     String duid = doubtUser.getDuid();
-                    if(duid.isEmpty()){
+                    if(duid==null){
                         continue;
                     }
 

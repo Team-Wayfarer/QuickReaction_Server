@@ -72,7 +72,6 @@ public class InitDB {
                     .contact("22-2222-2222")
                     .email("123123@aaa.com")
                     .password("cccc")
-                    .duid("c")
                     .build();
             em.persist(user3);
 
