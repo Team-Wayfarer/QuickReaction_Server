@@ -9,6 +9,7 @@ import org.quickresponse.qr.domain.spotAdmin.SpotAdmin;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SpotAdminFindAllResponseDto {
+
     private String SpotAdminName;
     private String email;
     private String businessNumber;

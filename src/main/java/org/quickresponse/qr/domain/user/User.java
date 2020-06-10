@@ -28,11 +28,18 @@ public class User {
 
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    private UserStatus userStatus;
+
     @OneToMany(mappedBy = "user")
     private List<VisitInfo> visitInfoList = new ArrayList<>();
 
     public boolean checkPassword(String password) {
         return this.password.equals(password);
+    }
+
+    public void setUserStatus(UserStatus userStatus){
+        this.userStatus = userStatus;
     }
 
     @Builder
@@ -41,5 +48,6 @@ public class User {
         this.contact = contact;
         this.email = email;
         this.password = password;
+        this.userStatus = UserStatus.NORMAL;
     }
 }

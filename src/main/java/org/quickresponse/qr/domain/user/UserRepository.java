@@ -1,11 +1,13 @@
 package org.quickresponse.qr.domain.user;
 
 import lombok.RequiredArgsConstructor;
+import org.quickresponse.qr.domain.visitInfo.VisitInfo;
 import org.quickresponse.qr.service.user.dto.UserLoginDto;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
