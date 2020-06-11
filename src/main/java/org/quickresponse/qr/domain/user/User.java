@@ -5,6 +5,7 @@ import lombok.*;
 import org.quickresponse.qr.domain.visitInfo.VisitInfo;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +34,8 @@ public class User {
 
     private String duid;
 
+    private LocalDateTime whenChange;
+
     @OneToMany(mappedBy = "user")
     private List<VisitInfo> visitInfoList = new ArrayList<>();
 
@@ -40,12 +43,16 @@ public class User {
         return this.password.equals(password);
     }
 
-    public void setUserStatus(UserStatus userStatus){
+    public void changeUserStatus(UserStatus userStatus){
         this.userStatus = userStatus;
     }
 
     public void setDuid(String duid){
         this.duid= duid;
+    }
+
+    public void changeWhenChange(LocalDateTime whenChange){
+        this.whenChange = whenChange;
     }
 
     @Builder
@@ -54,7 +61,8 @@ public class User {
         this.contact = contact;
         this.email = email;
         this.password = password;
-        this.userStatus = UserStatus.NORMAL;
         this.duid=duid;
+        this.userStatus = UserStatus.NORMAL;
+        this.whenChange = LocalDateTime.now();
     }
 }
