@@ -23,3 +23,7 @@ security:
     token:
       secret-key: ibmcallforcode2020inkoreahackathon
       expire-length: 3600000
+
+logging:
+  level:
+    org.hibernate.SQL: debug  #logger을 통해 하버네이트 실행 sql을 남김

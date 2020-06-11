@@ -27,7 +27,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
@@ -96,11 +95,11 @@ public class UserService {
     }
 
     @Transactional
-    public User changeUserStatus(Long userId, UserStatus userStatus) throws UnsupportedEncodingException {
+    public User changeUserInfectionStatus(Long userId, UserStatus userStatus) throws UnsupportedEncodingException {
         User user = userRepository.findById(userId);
         if (user == null)
             throw new IllegalStateException("등록된 사용자가 없습니다.");
-        user.setUserStatus(userStatus);
+        user.changeUserStatus(userStatus);
         user.changeWhenChange(LocalDateTime.now());
 
         List<VisitInfo> visitInfoListByInfection = visitInfoRepository.findVisitInfoListByUserId(user.getId(), 0, 100);
@@ -121,7 +120,7 @@ public class UserService {
                     if (isInfection(doubtUser.getUserStatus())) {
                         continue;
                     }
-                    doubtUser.setUserStatus(UserStatus.DOUBT);
+                    doubtUser.changeUserStatus(UserStatus.DOUBT);
                     doubtUser.changeWhenChange(LocalDateTime.now());
 
                     LocalDateTime infectionVisitTime = infectionVisitInfo.getLocalDateTime();
@@ -189,5 +188,21 @@ public class UserService {
             return true;
         }
         return false;
+    }
+
+    @Transactional
+    public User changeUserStatus(Long userId, UserStatus userStatus) {
+        User user = userRepository.findById(userId);
+        if(user==null){
+            throw new UserException("등록되지 않은 유저 idx. ",ErrorCode.UNSIGNED_USER);
+        }
+
+        if(user.getUserStatus()==userStatus){
+            throw new UserException("동일한 상태이기 때문에 변경이 불가합니다.",ErrorCode.ALREADY_IN_STATUS);
+        }
+
+        user.changeUserStatus(userStatus);
+        user.changeWhenChange(LocalDateTime.now());
+        return user;
     }
 }

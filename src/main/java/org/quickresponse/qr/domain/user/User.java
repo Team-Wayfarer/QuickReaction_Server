@@ -43,7 +43,7 @@ public class User {
         return this.password.equals(password);
     }
 
-    public void setUserStatus(UserStatus userStatus){
+    public void changeUserStatus(UserStatus userStatus){
         this.userStatus = userStatus;
     }
 
@@ -61,8 +61,8 @@ public class User {
         this.contact = contact;
         this.email = email;
         this.password = password;
-        this.userStatus = UserStatus.NORMAL;
         this.duid=duid;
+        this.userStatus = UserStatus.NORMAL;
         this.whenChange = LocalDateTime.now();
     }
 }
