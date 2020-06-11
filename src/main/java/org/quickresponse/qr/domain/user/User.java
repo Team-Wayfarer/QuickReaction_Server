@@ -44,12 +44,17 @@ public class User {
         this.userStatus = userStatus;
     }
 
+    public void setDuid(String duid){
+        this.duid= duid;
+    }
+
     @Builder
-    public User(String name, String contact, String email, String password) {
+    public User(String name, String contact, String email, String password, String duid) {
         this.name = name;
         this.contact = contact;
         this.email = email;
         this.password = password;
         this.userStatus = UserStatus.NORMAL;
+        this.duid=duid;
     }
 }

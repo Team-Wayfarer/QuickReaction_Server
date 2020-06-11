@@ -39,6 +39,16 @@ public class Address {
         this.zipcode = zipcode;
         this.detail = detail;
     }
+
+    @Override
+    public String toString() {
+        return "주소{" +
+                "시='" + city + '\'' +
+                ", 군구='" + gunGu + '\'' +
+                ", 주소'" + zipcode + '\'' +
+                ", 상세주소='" + detail + '\'' +
+                '}';
+    }
 }
 
 

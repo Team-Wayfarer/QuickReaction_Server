@@ -1,6 +1,7 @@
 package org.quickresponse.qr.service.user;
 
 import lombok.RequiredArgsConstructor;
+import org.quickresponse.qr.domain.spot.Spot;
 import org.quickresponse.qr.domain.user.User;
 import org.quickresponse.qr.domain.user.UserRepository;
 import org.quickresponse.qr.domain.user.UserStatus;
@@ -8,18 +9,27 @@ import org.quickresponse.qr.domain.visitInfo.VisitInfo;
 import org.quickresponse.qr.domain.visitInfo.VisitInfoRepository;
 import org.quickresponse.qr.exception.UserException;
 import org.quickresponse.qr.service.common.dto.ErrorCode;
+import org.quickresponse.qr.service.fcm.AndroidPushNotificationsService;
+import org.quickresponse.qr.service.fcm.AndroidPushPeriodicNotifications;
 import org.quickresponse.qr.service.user.dto.UserDetailResponseDto;
 import org.quickresponse.qr.service.user.dto.UserLoginDto;
 import org.quickresponse.qr.service.user.dto.UserSaveRequestDto;
 import org.quickresponse.qr.service.user.dto.UserUpdateRequestDto;
 import org.quickresponse.qr.util.JwtTokenProvider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.UnsupportedEncodingException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 @Transactional(readOnly = true)
@@ -30,6 +40,9 @@ public class UserService {
     private final VisitInfoRepository visitInfoRepository;
     private final JwtTokenProvider jwtTokenProvider;
 
+    Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired AndroidPushNotificationsService androidPushNotificationsService;
 
     @Transactional
     public Long join(UserSaveRequestDto dto) {
@@ -54,6 +67,7 @@ public class UserService {
         if (!user.checkPassword(dto.getPassword())) {
             throw new UserException("틀린 암호입니다", ErrorCode.WRONG_PASSWORD);
         }
+        user.setDuid(dto.getDuid());
         return jwtTokenProvider.createToken(dto.getEmail());
 
     }
@@ -71,6 +85,7 @@ public class UserService {
         return new UserDetailResponseDto(userRepository.findById(id));
     }
 
+    @Transactional
     public User updateContact(Long id, UserUpdateRequestDto dto) {
         userRepository.updateContact(id, dto.getContact());
         return userRepository.findById(id);
@@ -81,34 +96,48 @@ public class UserService {
     }
 
     @Transactional
-    public User changeUserStatus(Long userId, UserStatus userStatus) {
+    public User changeUserStatus(Long userId, UserStatus userStatus) throws UnsupportedEncodingException {
         User user = userRepository.findById(userId);
         if (user == null)
             throw new IllegalStateException("등록된 사용자가 없습니다.");
         user.setUserStatus(userStatus);
 
-        List<VisitInfo> visitInfoList = visitInfoRepository.findVisitInfoListByUserId(user.getId(), 0, 100);
+        List<VisitInfo> visitInfoListByInfection = visitInfoRepository.findVisitInfoListByUserId(user.getId(), 0, 100);
 
-        for (VisitInfo VisitInfoByUser : visitInfoList) {
-            if (!isOnAWeek(VisitInfoByUser.getLocalDateTime(), LocalDateTime.now())) {
+        for (VisitInfo infectionVisitInfo : visitInfoListByInfection) {
+            if (!isOnAWeek(infectionVisitInfo.getLocalDateTime(), LocalDateTime.now())) {
                 continue;
             }
 
-            List<VisitInfo> visitInfoListBySpotId = visitInfoRepository.findVisitInfoListBySpotId(VisitInfoByUser.getSpot().getId());
+            List<VisitInfo> allUserVisitInfoBySpot = visitInfoRepository.findVisitInfoListBySpotId(infectionVisitInfo.getSpot().getId());
 
-            for (VisitInfo VisitInfoBySpot : visitInfoListBySpotId) {
-                if (!isBefore(VisitInfoByUser.getLocalDateTime(), VisitInfoBySpot.getLocalDateTime())) {
+            for (VisitInfo userVisitInfoBySpot : allUserVisitInfoBySpot) {
+                if (!isBefore(infectionVisitInfo.getLocalDateTime(), userVisitInfoBySpot.getLocalDateTime())) {
                     continue;
                 }
-                if (isOnThreeHours(VisitInfoByUser.getLocalDateTime(), VisitInfoBySpot.getLocalDateTime()) && isSameDay(VisitInfoByUser.getLocalDateTime(), VisitInfoBySpot.getLocalDateTime())) {
-                    User doubtUser = userRepository.findById(VisitInfoBySpot.getUser().getId());
+                if (isOnThreeHours(infectionVisitInfo.getLocalDateTime(), userVisitInfoBySpot.getLocalDateTime()) && isSameDay(infectionVisitInfo.getLocalDateTime(), userVisitInfoBySpot.getLocalDateTime())) {
+                    User doubtUser = userRepository.findById(userVisitInfoBySpot.getUser().getId());
                     if (isInfection(doubtUser.getUserStatus())) {
                         continue;
                     }
                     doubtUser.setUserStatus(UserStatus.DOUBT);
+
+                    LocalDateTime infectionVisitTime = infectionVisitInfo.getLocalDateTime();
+                    LocalDateTime userVisitTime = userVisitInfoBySpot.getLocalDateTime();
+                    Spot userVisitedSpot = userVisitInfoBySpot.getSpot();
+                    String duid = doubtUser.getDuid();
+                    if(duid==null){
+                        continue;
+                    }
+
+                    String notifications = AndroidPushPeriodicNotifications.DoubtUserNotification(duid,userVisitedSpot, infectionVisitTime,userVisitTime );
+                    HttpEntity<String> request = new HttpEntity<>(notifications);
+                    CompletableFuture<String> pushNotification = androidPushNotificationsService.send(request);
+                    CompletableFuture.allOf(pushNotification).join();
                 }
             }
         }
+
         return user;
     }
 
