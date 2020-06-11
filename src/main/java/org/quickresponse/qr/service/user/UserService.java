@@ -101,6 +101,7 @@ public class UserService {
         if (user == null)
             throw new IllegalStateException("등록된 사용자가 없습니다.");
         user.setUserStatus(userStatus);
+        user.changeWhenChange(LocalDateTime.now());
 
         List<VisitInfo> visitInfoListByInfection = visitInfoRepository.findVisitInfoListByUserId(user.getId(), 0, 100);
 
@@ -121,6 +122,7 @@ public class UserService {
                         continue;
                     }
                     doubtUser.setUserStatus(UserStatus.DOUBT);
+                    doubtUser.changeWhenChange(LocalDateTime.now());
 
                     LocalDateTime infectionVisitTime = infectionVisitInfo.getLocalDateTime();
                     LocalDateTime userVisitTime = userVisitInfoBySpot.getLocalDateTime();
