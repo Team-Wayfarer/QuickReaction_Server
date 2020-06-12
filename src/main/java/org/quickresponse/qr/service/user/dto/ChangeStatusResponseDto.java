@@ -8,13 +8,13 @@ import org.quickresponse.qr.domain.user.UserStatus;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class StatusChangeResponseDto {
+public class ChangeStatusResponseDto {
 
-    private Long id;
+    private Long userId;
     private UserStatus userStatus;
 
-    public StatusChangeResponseDto(User user) {
-        id = user.getId();
+    public ChangeStatusResponseDto(User user) {
+        userId = user.getId();
         userStatus = user.getUserStatus();
     }
 }

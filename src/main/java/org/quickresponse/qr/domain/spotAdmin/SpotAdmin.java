@@ -23,9 +23,14 @@ public class SpotAdmin {
     private String email;
     private String businessNumber;
     private String contact;
+    private String duid;
 
     @OneToOne(mappedBy = "spotAdmin")
     private Spot spot;
+
+    public void setDuid(String duid){
+        this.duid = duid;
+    }
 
     public void setSpot(Spot spot){
         this.spot = spot;
@@ -36,11 +41,12 @@ public class SpotAdmin {
     }
 
     @Builder
-    public SpotAdmin(String name, String businessNumber, String contact, String password, String email ){
+    public SpotAdmin(String name, String businessNumber, String contact, String password, String email, String duid ){
         this.name=name;
         this.password = password;
         this.email = email;
         this.businessNumber=businessNumber;
         this.contact = contact;
+        this.duid = duid;
     }
 }

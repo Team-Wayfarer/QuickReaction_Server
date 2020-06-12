@@ -8,15 +8,12 @@ import org.quickresponse.qr.domain.user.User;
 import org.quickresponse.qr.domain.user.UserStatus;
 import org.quickresponse.qr.exception.UserException;
 import org.quickresponse.qr.service.common.dto.ErrorCode;
-import org.quickresponse.qr.service.user.dto.StatusChangeResponseDto;
-import org.quickresponse.qr.service.user.dto.UserDetailResponseDto;
-import org.quickresponse.qr.service.user.dto.UserSaveRequestDto;
-import org.quickresponse.qr.service.user.dto.UserUpdateRequestDto;
+import org.quickresponse.qr.service.user.dto.*;
 import org.quickresponse.qr.service.user.UserService;
-import org.quickresponse.qr.service.visitInfo.dto.VisitInfoDto;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.UnsupportedEncodingException;
 
 @Api(tags = {"2. User"})
 @Slf4j
@@ -37,7 +34,9 @@ public class UserController {
             "Long id; 유저 고유번호\n" +
             "String name; 유저 이름 \n" +
             "String contact; 유저 전화번호\n" +
-            "String email; 유저 이메일")
+            "String email; 유저 이메일\n" +
+            "UserStatus userStatus; 유저 상태 정보 \n" +
+            "LocalDateTime whenChange; 상태 변경 시간 ")
     @GetMapping("/{id}")
     public UserDetailResponseDto getUserInfo(@PathVariable Long id) {
         return userService.getUserInfo(id);
@@ -50,20 +49,29 @@ public class UserController {
         return user.getId();
     }
 
-    @ApiOperation(value = "유저 확진자 등록", notes = "유저를 확진자로 등록합니다")
+    @ApiOperation(value = "유저 확진자 등록", notes = "선택한 유저를 확진자로 등록합니다")
     @PostMapping("/{userId}/change/{status}/infect")
-    public StatusChangeResponseDto changeUserStatus(@PathVariable("userId") Long userId, @RequestParam("status") UserStatus userStatus) {
+    public ChangeInfectionStatusResponseDto changeUserInfectionStatus(@PathVariable("userId") Long userId, @RequestParam("status") UserStatus userStatus) throws UnsupportedEncodingException {
         if (userStatus != UserStatus.INFECT)
             throw new UserException("확진자 등록만 가능합니다.", ErrorCode.FAVORITE_DUPLICATED.INVALID_AUTHENTICATION);
 
-        User user = userService.changeUserStatus(userId, userStatus);
-        return new StatusChangeResponseDto(user);
-
+        User user = userService.changeUserInfectionStatus(userId, userStatus);
+        return new ChangeInfectionStatusResponseDto(user);
     }
 
     @ApiOperation(value = "유저 이메일 중복 확인", notes = "RequestBody로 이메일 전달" )
     @PostMapping("/check")
     public ResponseEntity<Boolean> checkEmail(@RequestBody String email) {
         return ResponseEntity.ok(userService.validatesEmail(email));
+    }
+
+    @ApiOperation(value = "유저 상태 변경", notes = "선택한 유저의 상태를 변경합니다.")
+    @PostMapping("/{userId}/change/{status}")
+    public ChangeStatusResponseDto changeUserStatus(@PathVariable("userId") Long userId, @RequestParam("status") UserStatus userStatus) {
+        if (userStatus == UserStatus.INFECT)
+            throw new UserException("현재 접근에서 확진자 등록은 불가능 합니다. ", ErrorCode.INVALID_AUTHENTICATION);
+
+        User user = userService.changeUserStatus(userId, userStatus);
+        return new ChangeStatusResponseDto(user);
     }
 }
