@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 
 /*
@@ -54,6 +55,7 @@ public class InitDB {
                     .contact("000-0000-0000")
                     .email("aaa@aaa.com")
                     .password("abcd")
+                    .duid("a")
                     .build();
             em.persist(user);
 
@@ -62,6 +64,7 @@ public class InitDB {
                     .contact("111-1111-1111")
                     .email("bbb@aaa.com")
                     .password("abcd")
+                    .duid("b")
                     .build();
             em.persist(user2);
 
@@ -79,6 +82,7 @@ public class InitDB {
                     .email("xxx@naver.com")
                     .businessNumber("11111111")
                     .contact("010-0000-0000")
+                    .duid("a")
                     .build();
             em.persist(spotAdmin);
 
@@ -88,6 +92,7 @@ public class InitDB {
                     .email("aaa@gmail.com")
                     .businessNumber("22222222")
                     .contact("010-1111-1111")
+                    .duid("b")
                     .build();
             em.persist(spotAdmin2);
 
@@ -172,6 +177,7 @@ public class InitDB {
                     .contact("444-4444-4444")
                     .email("zzzz@zzzz.com")
                     .password("abcd")
+                    .duid("d")
                     .build();
             em.persist(user);
 
@@ -180,6 +186,7 @@ public class InitDB {
                     .contact("5555-5555-5555")
                     .email("xxx@xxxx.com")
                     .password("abcd")
+                    .duid("e")
                     .build();
             em.persist(user2);
 
@@ -188,6 +195,7 @@ public class InitDB {
                     .contact("777-7777-7777")
                     .email("ccc@ccc.com")
                     .password("cccc")
+                    .duid("f")
                     .build();
             em.persist(user3);
 
@@ -197,6 +205,7 @@ public class InitDB {
                     .email("tttt@naver.com")
                     .businessNumber("070707070")
                     .contact("010-0707-0707")
+                    .duid("c")
                     .build();
             em.persist(spotAdmin);
 
@@ -206,6 +215,7 @@ public class InitDB {
                     .email("rrrr@gmail.com")
                     .businessNumber("34343434")
                     .contact("010-2424-2424")
+                    .duid("d")
                     .build();
             em.persist(spotAdmin2);
 

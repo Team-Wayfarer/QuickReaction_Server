@@ -44,6 +44,8 @@ public class SpotAdminService {
         if (!spotAdmin.checkPassword(spotAdminLoginDto.getPassword())) {
             throw new SpotAdminException("틀린 암호입니다.", ErrorCode.WRONG_PASSWORD);
         }
+        spotAdmin.setDuid(spotAdminLoginDto.getDuid());
+
         return jwtTokenProvider.createToken(spotAdminLoginDto.getEmail());
     }
 
