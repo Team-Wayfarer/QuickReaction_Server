@@ -11,7 +11,7 @@
 ---
 
 ### 사용기술
-
+#### Backend
 * Spring Boot: 2.3.0
 * Spring Jpa: 2.3.0
 * Hibernate: 5.4.15
@@ -19,4 +19,7 @@
 * lombok: 1.18.12
 * Jjwt: 0.9.1
 * Firebase: 6.5.0
-
+#### Frontend
+* Vue: 3.6.5
+* Vuex: 3.4.0
+* Vue-Router: 3.3.2
