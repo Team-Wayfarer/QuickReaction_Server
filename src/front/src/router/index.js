@@ -1,12 +1,14 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import Main from "@/components/Main.vue";
+import Home from "@/components/Main.vue";
 import SpotMain from "@/components/spotadmin/Main.vue";
+import SpotSignUp from "@/components/spotadmin/Signup.vue";
 import SpotRegister from "@/components/spotadmin/Register.vue";
 import SpotManage from "@/components/spotadmin/Manage.vue";
-import CodeIssue from "@/components/spotadmin/Isuue.vue";
+import CodeIssue from "@/components/spotadmin/Issue.vue";
 import CodeDestroy from "@/components/spotadmin/Destroy.vue";
+import Admin from "@/components/Admin.vue";
 
 Vue.use(VueRouter);
 
@@ -15,8 +17,13 @@ export default new VueRouter({
   routes: [
     {
       path: "/",
-      name: "main",
-      component: Main
+      name: "home",
+      component: Home
+    },
+    {
+      path: "/spotsignup",
+      name: "spotsignup",
+      components: SpotSignUp
     },
     {
       path: "/spot",
@@ -24,24 +31,29 @@ export default new VueRouter({
       component: SpotMain
     },
     {
-      path: "/spot/regist",
+      path: "/spotregist",
       name: "spotregist",
       component: SpotRegister
     },
     {
-      path: "/spot/detail",
+      path: "/spotdetail",
       name: "spotdetail",
       component: SpotManage
     },
     {
-      path: "/code/issue",
+      path: "/codeissue",
       name: "codeissue",
       component: CodeIssue
     },
     {
-      path: "/code/destroy",
+      path: "/codedestroy",
       name: "codedestroy",
       component: CodeDestroy
+    },
+    {
+      path: "/admin",
+      name: "admin",
+      component: Admin
     }
   ]
 });
