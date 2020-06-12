@@ -32,3 +32,4 @@ out/
 .vscode/
 *.xml
 application-real.yml
+src/main/resources/real.yml
