@@ -16,11 +16,10 @@ import java.util.Hashtable;
 
 public class CodeGenerator {
 
-    static final String preUrl = "";
-    static final String preFilePath = "/Users/pandahun/out/";
-
+    static final String preUrl = "https://wotjd.page.link/test2?spotid=";
+    static final String preFilePath = System.getProperty("user.dir") + "/out/";
     public static String create(Long spotId) throws IOException, WriterException {
-        String qrCodeText = spotId +"";
+        String qrCodeText = preUrl + spotId +"";
         String filePath = preFilePath + spotId + ".png";
         int size = 300;
         String fileType = "png";
