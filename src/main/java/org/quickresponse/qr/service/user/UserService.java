@@ -2,6 +2,7 @@ package org.quickresponse.qr.service.user;
 
 import lombok.RequiredArgsConstructor;
 import org.quickresponse.qr.domain.spot.Spot;
+import org.quickresponse.qr.domain.spotAdmin.SpotAdmin;
 import org.quickresponse.qr.domain.user.User;
 import org.quickresponse.qr.domain.user.UserRepository;
 import org.quickresponse.qr.domain.user.UserStatus;
@@ -108,6 +109,16 @@ public class UserService {
             if (!isOnAWeek(infectionVisitInfo.getLocalDateTime(), LocalDateTime.now())) {
                 continue;
             }
+            SpotAdmin spotAdmin = infectionVisitInfo.getSpot().getSpotAdmin();
+            LocalDateTime infectionVisitTime = infectionVisitInfo.getLocalDateTime();
+            Spot infectionVisitedSpot = infectionVisitInfo.getSpot();
+
+            String spotAdminDuid = spotAdmin.getDuid();
+
+            String notifications = AndroidPushPeriodicNotifications.spotAdminNotification(spotAdminDuid, infectionVisitedSpot, infectionVisitTime );
+            HttpEntity<String> request = new HttpEntity<>(notifications);
+            CompletableFuture<String> pushNotification = androidPushNotificationsService.send(request);
+            CompletableFuture.allOf(pushNotification).join();
 
             List<VisitInfo> allUserVisitInfoBySpot = visitInfoRepository.findVisitInfoListBySpotId(infectionVisitInfo.getSpot().getId());
 
@@ -123,7 +134,7 @@ public class UserService {
                     doubtUser.changeUserStatus(UserStatus.DOUBT);
                     doubtUser.changeWhenChange(LocalDateTime.now());
 
-                    LocalDateTime infectionVisitTime = infectionVisitInfo.getLocalDateTime();
+                    infectionVisitTime = infectionVisitInfo.getLocalDateTime();
                     LocalDateTime userVisitTime = userVisitInfoBySpot.getLocalDateTime();
                     Spot userVisitedSpot = userVisitInfoBySpot.getSpot();
                     String duid = doubtUser.getDuid();
@@ -131,9 +142,9 @@ public class UserService {
                         continue;
                     }
 
-                    String notifications = AndroidPushPeriodicNotifications.DoubtUserNotification(duid,userVisitedSpot, infectionVisitTime,userVisitTime );
-                    HttpEntity<String> request = new HttpEntity<>(notifications);
-                    CompletableFuture<String> pushNotification = androidPushNotificationsService.send(request);
+                    notifications = AndroidPushPeriodicNotifications.DoubtUserNotification(duid,userVisitedSpot, infectionVisitTime,userVisitTime );
+                    request = new HttpEntity<>(notifications);
+                    pushNotification = androidPushNotificationsService.send(request);
                     CompletableFuture.allOf(pushNotification).join();
                 }
             }

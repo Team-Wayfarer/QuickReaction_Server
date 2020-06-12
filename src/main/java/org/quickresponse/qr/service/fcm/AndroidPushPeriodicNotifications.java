@@ -15,9 +15,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AndroidPushPeriodicNotifications {
-    public static String DoubtUserNotification(String duid, Spot userVisitedSpot, LocalDateTime infectionVisitTime, LocalDateTime userVisitTime) throws JSONException, UnsupportedEncodingException {
+    public static String spotAdminNotification(String duid, Spot infectionVisitedSpot, LocalDateTime infectionVisitTime) throws JSONException, UnsupportedEncodingException {
 
-        LocalDate localDate = LocalDate.now();
+        JSONObject body = new JSONObject();
+
+        body.put("to", duid);
+
+        JSONObject data = new JSONObject();
+
+        data.put("title",URLEncoder.encode("확진자가 회원의 매장에 방문하였습니다.","UTF-8"));
+        data.put("body1",URLEncoder.encode("확진자가 방문한 장소 이름: "+ infectionVisitedSpot.getName(),"UTF-8"));
+        data.put("body2",URLEncoder.encode("확진자가 방문한 장소 주소 "+ infectionVisitedSpot.getAddress().toString(),"UTF-8"));
+        data.put("body3",URLEncoder.encode("확진자 방문시간 "+ infectionVisitTime.toString(),"UTF-8"));
+        data.put("body4",URLEncoder.encode("","UTF-8"));
+
+/*
+        data.put("title","확진자와 접촉하였습니다.");
+        data.put("body1","방문한 장소 이름: "+ userVisitedSpot.getName());
+        data.put("body2","방문한 장소 주소 "+ userVisitedSpot.getAddress());
+        data.put("body3","확진자 방문시간 "+ infectionVisitTime.toString());
+        data.put("body4","본인 방문시간 "+ userVisitTime.toString());
+*/
+
+        body.put("data", data);
+
+        System.out.println(body.toString());
+
+        return body.toString();
+    }
+    public static String DoubtUserNotification(String duid, Spot userVisitedSpot, LocalDateTime infectionVisitTime, LocalDateTime userVisitTime) throws JSONException, UnsupportedEncodingException {
 
         JSONObject body = new JSONObject();
 

@@ -12,11 +12,16 @@ public class SpotAdminLoginDto {
 
     @NotEmpty
     private String email;
+
     @NotEmpty
     private String password;
 
-    public SpotAdminLoginDto(String email, String password) {
+    @NotEmpty
+    private String duid;
+
+    public SpotAdminLoginDto(String email, String password, String duid) {
         this.email = email;
         this.password = password;
+        this.duid = duid;
     }
 }

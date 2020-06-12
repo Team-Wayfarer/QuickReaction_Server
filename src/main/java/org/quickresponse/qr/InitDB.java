@@ -82,6 +82,7 @@ public class InitDB {
                     .email("xxx@naver.com")
                     .businessNumber("11111111")
                     .contact("010-0000-0000")
+                    .duid("a")
                     .build();
             em.persist(spotAdmin);
 
@@ -91,6 +92,7 @@ public class InitDB {
                     .email("aaa@gmail.com")
                     .businessNumber("22222222")
                     .contact("010-1111-1111")
+                    .duid("b")
                     .build();
             em.persist(spotAdmin2);
 
@@ -203,6 +205,7 @@ public class InitDB {
                     .email("tttt@naver.com")
                     .businessNumber("070707070")
                     .contact("010-0707-0707")
+                    .duid("c")
                     .build();
             em.persist(spotAdmin);
 
@@ -212,6 +215,7 @@ public class InitDB {
                     .email("rrrr@gmail.com")
                     .businessNumber("34343434")
                     .contact("010-2424-2424")
+                    .duid("d")
                     .build();
             em.persist(spotAdmin2);
 
