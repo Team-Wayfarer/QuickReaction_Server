@@ -1,6 +1,6 @@
 # QuickReaction
 
-재난 같은 긴급재난알림, 그리고 개인정보 노출 우려
+Goal: 재난 같은 긴급재난알림, 그리고 개인정보 노출 우려를 해소
 
 2020 Call for Code Korea Hackathon
 
